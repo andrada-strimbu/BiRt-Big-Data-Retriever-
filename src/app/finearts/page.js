@@ -105,3 +105,5 @@ const FineArtsPage = () => {
 
 export default FineArtsPage;
 
+// 2 artisti cu influente comune
+//

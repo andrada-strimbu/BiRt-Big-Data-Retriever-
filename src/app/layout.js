@@ -22,7 +22,7 @@ export default function RootLayout({ children }) {
     <html lang="en">
     <body>
       <nav>
-        <a href="/finearts">Fine Arts</a> | <a href="/music">Music</a>
+        <a href="/finearts">Fine Arts</a> | <a href="/music">Music</a> | <a href='/artists'>Artists</a> | <a href='/influences'>Influences</a>
       </nav>
       <main>{children}</main>
     </body>

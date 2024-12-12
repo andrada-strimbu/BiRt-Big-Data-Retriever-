@@ -1,5 +1,5 @@
-import ArtistList from '@/components/ArtistList';
-import { queryWikidata } from '@/lib/sparql';
+import ArtistList from '@/components/ArtistsList';
+import { fetchSPARQLData } from '@/lib/sparql';
 
 export default async function ArtistsPage() {
   const query = `
@@ -17,11 +17,11 @@ export default async function ArtistsPage() {
     LIMIT 10
   `;
 
-  const artists = await queryWikidata(query);
+  const artists = await fetchSPARQLData(query);
 
   return (
     <div>
-      <h1>Italian Painters</h1>
+      <h1>Italian Painters and their Birth Place</h1>
       <ArtistList artists={artists} />
     </div>
   );

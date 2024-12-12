@@ -20,7 +20,7 @@ export const MUSIC_INFLUENCES_QUERY = `
   PREFIX wdt: <http://www.wikidata.org/prop/direct/>
   PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 
-  SELECT ?artist ?artistLabel ?genre ?genreLabel ?influenced
+  SELECT ?artist ?artistLabel ?genre ?genreLabel ?influenced ?influencedLabel
   WHERE {
     ?artist wdt:P106 wd:Q639669;           # Occupation: Musician
             wdt:P27 wd:Q30 .              # Citizen of the United States
@@ -28,8 +28,21 @@ export const MUSIC_INFLUENCES_QUERY = `
             wdt:P737 ?influenced .        # Influences
     SERVICE wikibase:label { bd:serviceParam wikibase:language "en" }
   }
-  LIMIT 20
+    LIMIT 20
 `;
+
+
+export const GENRE_INFLUENCES_QUERY =`
+    PREFIX wd: <http://www.wikidata.org/entity/>
+  PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+  SELECT ?musicGenre ?musicGenreLabel ?influencedMusicGenre ?influencedMusicGenreLabel
+  WHERE {
+    ?musicGenre wdt:P31 wd:Q188451;  # Ensure the item is a music genre (Q188451).
+               wdt:P737 ?influencedMusicGenre. # Get genres it has influenced.
+    SERVICE wikibase:label { bd:serviceParam wikibase:language "en". }
+  }
+`;
+
 
 export const FINE_ARTS_QUERY_WITH_FILTERS = (startYear, endYear, region) => `
   PREFIX wd: <http://www.wikidata.org/entity/>

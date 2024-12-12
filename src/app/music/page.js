@@ -22,10 +22,11 @@ const MusicPage = () => {
     fetchData();
   }, []);
 
+  // console.log("data: ", data);
   return (
     <div>
       <h1>Music Influences</h1>
-      {loading ? <p>Loading...</p> : <DataTable data={data} columns={['artistLabel', 'genreLabel', 'influenced']} />}
+      {loading ? <p>Loading...</p> : <DataTable data={data} columns={['artistLabel', 'genreLabel', 'influencedLabel']} />}
     </div>
   );
 };
