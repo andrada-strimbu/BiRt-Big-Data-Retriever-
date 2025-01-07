@@ -44,6 +44,41 @@ export const GENRE_INFLUENCES_QUERY =`
 `;
 
 
+// ex: de ce genuri a fost influentat doom metal (Q186170)
+// PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+// SELECT ?influencedBy ?influencedByLabel
+// WHERE {
+//   wd:Q186170 wdt:P737 ?influencedBy.
+//   SERVICE wikibase:label { bd:serviceParam wikibase:language "en". }
+// }
+// LIMIT 10
+
+
+//Query pt genurile muzicale care contin proprietatea "influenced by"
+export const MUSIC_GENRES_INFLUENCED_BY = `PREFIX wd: <http://www.wikidata.org/entity/>
+PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT DISTINCT ?musicGenre ?musicGenreLabel  
+WHERE {
+  ?musicGenre wdt:P31 wd:Q188451;  # Instance of a music genre
+             wdt:P737 ?influencedBy.  # "Influenced by" property
+  SERVICE wikibase:label { bd:serviceParam wikibase:language "en". }
+}
+`
+
+
+export const SELECT_GENRE_INFLUENCES_QUERY = (selectedGenre) => `
+PREFIX wd: <http://www.wikidata.org/entity/>
+PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+SELECT ?influencedBy ?influencedByLabel
+WHERE {
+  wd:${selectedGenre} wdt:P737 ?influencedBy. # Genres influencing the selected genre
+  SERVICE wikibase:label { bd:serviceParam wikibase:language "en". }
+}
+`;
+
+
 export const FINE_ARTS_QUERY_WITH_FILTERS = (startYear, endYear, region) => `
   PREFIX wd: <http://www.wikidata.org/entity/>
   PREFIX wdt: <http://www.wikidata.org/prop/direct/>
