@@ -98,13 +98,13 @@ const MusicPage = () => {
 
   return (
     <div>
-      <h1>Music Influences</h1>
+      <h1>Music Artists & Their Artist Influences</h1>
       {loading ? <p>Loading...</p> : <DataTable data={data} columns={['artistLabel', 'genreLabel', 'influencedLabel']} />}
 
       {/* Primul grafic pentru genreLabel */}
       <svg id="genreLabel-chart"></svg>
 
-      {/* Al doilea grafic pentru influencedLabel */}
+      {/* Al doilea grafic pentru influencedLabel - cati artisti a influentat fiecare artist */}
       <svg id="influencedLabel-chart" style={{ marginTop: '50px' }}></svg>
     </div>
   );

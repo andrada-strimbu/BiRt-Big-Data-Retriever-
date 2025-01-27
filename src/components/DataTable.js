@@ -2,9 +2,10 @@ import React from 'react';
 
 
 const DataTable = ({ data, columns }) => {
-  console.log("data:", data)
+  // console.log("data:", data)
   return (
     <table>
+      {/* artistLabel          workLabel            creationYear  */}
       <thead>
         <tr>
           {columns.map((col, idx) => (
@@ -14,7 +15,7 @@ const DataTable = ({ data, columns }) => {
       </thead>
       <tbody>
         {data && data.map((row, idx) => (
-          console.log("rows: ", row),
+          // console.log("rows: ", row),
           <tr key={idx}>
             {columns.map((col, colIdx) => (
               <td key={colIdx}>{row[col]?.value || 'N/A'}</td>

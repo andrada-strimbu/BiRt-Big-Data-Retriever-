@@ -32,7 +32,7 @@ export const MUSIC_INFLUENCES_QUERY = `
 `;
 
 
-export const GENRE_INFLUENCES_QUERY =`
+export const GENRE_INFLUENCES_QUERY = `
     PREFIX wd: <http://www.wikidata.org/entity/>
   PREFIX wdt: <http://www.wikidata.org/prop/direct/>
   SELECT ?musicGenre ?musicGenreLabel ?influencedMusicGenre ?influencedMusicGenreLabel
@@ -79,19 +79,56 @@ WHERE {
 `;
 
 
-export const FINE_ARTS_QUERY_WITH_FILTERS = (startYear, endYear, region) => `
-  PREFIX wd: <http://www.wikidata.org/entity/>
-  PREFIX wdt: <http://www.wikidata.org/prop/direct/>
-  PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+// export const FINE_ARTS_QUERY_WITH_FILTERS = (startYear, endYear, region) => `
+// PREFIX wd: <http://www.wikidata.org/entity/>
+// PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+// PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+// PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
 
-  SELECT ?artist ?artistLabel ?work ?workLabel ?creationYear
-  WHERE {
-    ?artist wdt:P106 wd:Q1028181;           # Occupation: Painter
-            wdt:P27 ${region} .            # Filter by region (e.g., wd:Q38 for Italy)
-    ?work wdt:P170 ?artist;                # Creator of the work
-          wdt:P571 ?creationDate .         # Creation date
-    FILTER(YEAR(?creationDate) >= ${startYear} && YEAR(?creationDate) <= ${endYear})
-    SERVICE wikibase:label { bd:serviceParam wikibase:language "en" }
+// SELECT ?artist ?artistLabel ?work ?workLabel ?creationYear
+// WHERE {
+//   ?artist wdt:P106 wd:Q1028181;           # Occupation: Painter
+//           wdt:P27 ${region} .            # Filter by region (e.g., wd:Q38 for Italy)
+//   ?work wdt:P170 ?artist;                # Creator of the work
+//         wdt:P571 ?creationDate .         # Creation date
+//   BIND(YEAR(xsd:dateTime(?creationDate)) AS ?creationYear)  # Extract creation year
+//   FILTER(?creationYear >= ${startYear} && ?creationYear <= ${endYear})
+//   SERVICE wikibase:label { bd:serviceParam wikibase:language "en" }
+// }
+// LIMIT 20
+// `;
+
+export const FINE_ARTS_QUERY_WITH_FILTERS = (startYear, endYear, region) => `
+ PREFIX wd: <http://www.wikidata.org/entity/>
+PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+SELECT DISTINCT ?artist ?artistLabel ?work ?workLabel ?creationYear
+WHERE {
+  ?artist wdt:P106 wd:Q1028181;              # Occupation: Painter
+          wdt:P27 ${region} .                   # Filter by region (e.g., wd:Q38 for Italy)
+  ?work wdt:P170 ?artist;                    # Creator of the work
+        wdt:P571 ?creationDate .             # Creation date
+  BIND(YEAR(xsd:dateTime(?creationDate)) AS ?creationYear)  # Extract creation year
+  FILTER(?creationYear >= ${startYear} && ?creationYear <= ${endYear})
+
+  OPTIONAL { ?work rdfs:label ?workLabel_en . FILTER (lang(?workLabel_en) = "en") }
+  OPTIONAL { ?work rdfs:label ?workLabel_any . FILTER (lang(?workLabel_any) != "en") }
+  BIND(COALESCE(?workLabel_en, ?workLabel_any) AS ?workLabel)
+
+  SERVICE wikibase:label { bd:serviceParam wikibase:language "en" }
+}
+LIMIT 20
+`
+
+export const REGIONS_QUERY = `
+  SELECT DISTINCT ?region ?regionLabel WHERE {
+    ?region wdt:P31 wd:Q6256. # Instance of "country"
+    SERVICE wikibase:label { bd:serviceParam wikibase:language "[AUTO_LANGUAGE],en". }
   }
-  LIMIT 20
+  ORDER BY ?regionLabel
 `;
+
+
+// ORDER BY ?artistLabel

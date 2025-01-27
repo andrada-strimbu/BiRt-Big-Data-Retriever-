@@ -17,7 +17,5 @@ export async function GET(req) {
   `;
 
   const data = await queryWikidata(query);
-//   console.log("data: ", data);
-// console.log("[route.js]");
   return new Response(JSON.stringify(data), { status: 200 });
 }

@@ -1,56 +1,59 @@
-// 'use client'
-// import React, { useEffect, useState } from 'react';
-// import { fetchSPARQLData } from '@/lib/sparql';
-// import { FINE_ARTS_QUERY } from '@/utils/queries';
-// import DataTable from '@/components/DataTable';
-
-// const FineArtsPage = () => {
-//   const [data, setData] = useState();
-//   const [loading, setLoading] = useState(true);
-
-//   useEffect(() => {
-//     const fetchData = async () => {
-//       setLoading(true);
-//       try {
-//         const results = await fetchSPARQLData(FINE_ARTS_QUERY);
-//         setData(results);
-//       } catch (error) {
-//         console.error(error);
-//       }
-//       setLoading(false);
-//     };
-//     fetchData();
-//   }, []);
-
-//   return (
-//     <div>
-//       <h1>Fine Arts Influences (Since 1900)</h1>
-//       {loading ? <p>Loading...</p> : <DataTable data={data} columns={['artistLabel', 'workLabel', 'creationYear']} />}
-//     </div>
-//   );
-// };
-
-// export default FineArtsPage;
-
 'use client';
-
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { fetchSPARQLData } from '@/lib/sparql';
-import { FINE_ARTS_QUERY_WITH_FILTERS } from '@/utils/queries';
+import { FINE_ARTS_QUERY_WITH_FILTERS, REGIONS_QUERY } from '@/utils/queries';
 import DataTable from '@/components/DataTable';
+
 
 const FineArtsPage = () => {
   const [startYear, setStartYear] = useState(1900);
   const [endYear, setEndYear] = useState(2000);
-  const [region, setRegion] = useState('wd:Q38'); // Default: Italy
+  const [regionQuery, setRegionQuery] = useState('');
+  const [regions, setRegions] = useState([]);
   const [data, setData] = useState();
   const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    const fetchRegions = async () => {
+      try {
+        console.log('[FETCH REGIONS]...');
+        const cachedRegions = localStorage.getItem('regions');
+
+        if (cachedRegions) {
+          console.log('[USING CACHED REGIONS]');
+          const parsedRegions = JSON.parse(cachedRegions);
+          const regionsList = parsedRegions.map((item) => ({
+            id: `wd:${item.id.split('/')[4]}`,
+            label: item.label,
+          }));
+          setRegions(regionsList);
+          setRegionQuery(parsedRegions[0]?.id || ''); // Set default region
+        } else {
+          const results = await fetchSPARQLData(REGIONS_QUERY);
+          const regionsList = results.map((item) => ({
+            id: `wd:${item.region.value.split('/')[4]}`,
+            label: item.regionLabel.value,
+          }));
+          console.log("region[0] id: ", regionsList[0].id);
+          setRegions(regionsList);
+          setRegionQuery(regionsList[0]?.id || ''); // Set default region
+          localStorage.setItem('regions', JSON.stringify(regionsList)); // Cache regions
+          console.log('[REGIONS CACHED]');
+        }
+      } catch (error) {
+        console.error('Error fetching regions:', error);
+      }
+    };
+    fetchRegions();
+  }, []);
 
   const handleSearch = async () => {
     setLoading(true);
     try {
-      const query = FINE_ARTS_QUERY_WITH_FILTERS(startYear, endYear, region);
+      const query = FINE_ARTS_QUERY_WITH_FILTERS(startYear, endYear, regionQuery);
+      console.log("query: ", query);
       const results = await fetchSPARQLData(query);
+      console.log('Results: ', results);
       setData(results);
     } catch (error) {
       console.error(error);
@@ -60,7 +63,8 @@ const FineArtsPage = () => {
 
   return (
     <div>
-      <h1>Fine Arts Influences</h1>
+      <h1>Painters & their works</h1>
+
       <form
         onSubmit={(e) => {
           e.preventDefault();
@@ -75,6 +79,7 @@ const FineArtsPage = () => {
             onChange={(e) => setStartYear(Number(e.target.value))}
           />
         </div>
+
         <div>
           <label>End Year:</label>
           <input
@@ -83,14 +88,18 @@ const FineArtsPage = () => {
             onChange={(e) => setEndYear(Number(e.target.value))}
           />
         </div>
+
         <div>
           <label>Region:</label>
-          <select value={region} onChange={(e) => setRegion(e.target.value)}>
-            <option value="wd:Q38">Italy</option>
-            <option value="wd:Q30">United States</option>
-            <option value="wd:Q55">Netherlands</option>
+          <select value={regionQuery} onChange={(e) => setRegionQuery(e.target.value)}>
+            {regions.map((region) => (
+              <option key={region.id} value={region.id}>
+                {region.label}
+              </option>
+            ))}
           </select>
         </div>
+
         <button type="submit">Search</button>
       </form>
 

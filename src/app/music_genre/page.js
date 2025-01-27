@@ -13,9 +13,19 @@ export default function Influences() {
     useEffect(() => {
         const fetchGenres = async () => {
             try {
-                const data = await fetchSPARQLData(MUSIC_GENRES_INFLUENCED_BY);
-                console.log("music genres influenced by data: ", data);
-                setAvailableGenres(data);
+                const cachedmusicGenres = localStorage.getItem('musicGenres');
+                if (cachedmusicGenres) {
+                    console.log('[USING CACHED genres]');
+                    const parsedMusicGenres = JSON.parse(cachedmusicGenres);
+                    setAvailableGenres(parsedMusicGenres);
+
+                } else {
+                    const data = await fetchSPARQLData(MUSIC_GENRES_INFLUENCED_BY);
+                    console.log("music genres influenced by data: ", data);
+                    setAvailableGenres(data);
+                    localStorage.setItem('musicGenres', JSON.stringify(data));
+                }
+
             } catch (error) {
                 console.error("Error at fetching genres: ", error);
             }
@@ -45,7 +55,7 @@ export default function Influences() {
         fetchData();
     }, [selectedGenre]);
 
-    
+
     return (
         <div style={{ padding: '20px' }}>
             <h1>Music Genre Influences</h1>
