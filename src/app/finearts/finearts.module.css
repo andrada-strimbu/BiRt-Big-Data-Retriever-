@@ -1,0 +1,41 @@
+.fineartsInput {
+    display: flex;
+    flex-direction: column;
+    /* justify-content: flex-start; */
+    overflow-y: auto;
+    /* align-items: center; */
+    gap: 130px;
+    /* background-color: green; */
+    width: 100%;
+    height: 100%;
+}
+
+
+.title {
+    text-align: center;
+    margin-top: 50px;
+}
+
+.form {
+    display: flex;
+    /* background-color: red; */
+    align-items: center;
+    justify-content: space-around;
+    /* width: 100%; */
+    /* flex-direction: column; */
+    gap: 20px;
+}
+
+.form p {
+    word-wrap: break-word;
+}
+
+@media screen and (max-width: 768px) {
+    .form {
+        flex-direction: column;
+    }
+}
+
+.formInput {
+    display: flex;
+}

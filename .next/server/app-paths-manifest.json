@@ -1,6 +1,0 @@
-{
-  "/favicon.ico/route": "app/favicon.ico/route.js",
-  "/finearts/page": "app/finearts/page.js",
-  "/music_genre/page": "app/music_genre/page.js",
-  "/music/page": "app/music/page.js"
-}

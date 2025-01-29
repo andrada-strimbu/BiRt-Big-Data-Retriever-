@@ -1,0 +1,15 @@
+.formInput {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.inputRow {
+    display: flex;
+    gap: 5px;
+    align-items: center;
+}
+
+.formInput input, .formInput button {
+    padding: 5px;
+}
