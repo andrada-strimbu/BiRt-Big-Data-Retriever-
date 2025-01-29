@@ -5,6 +5,8 @@
   display: flex;
   justify-content: flex-end;
   gap: 50px;
+  position: sticky;
+  /* width: 100%; */
 }
 
 @media screen and (max-width: 450px) {

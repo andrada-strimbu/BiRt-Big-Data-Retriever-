@@ -5,6 +5,7 @@ import { fetchSPARQLData } from '@/lib/sparql';
 import { MUSIC_INFLUENCES_QUERY } from '@/utils/queries';
 import * as d3 from 'd3';
 import DataTable from '@/components/DataTable';
+import styles from './music.module.css'
 
 const MusicPage = () => {
   const [data, setData] = useState();
@@ -97,8 +98,9 @@ const MusicPage = () => {
   };
 
   return (
-    <div>
+    <div className={styles.musicPageLayout}>
       <h1>Music Artists & Their Artist Influences</h1>
+      {/* <h1>Music Artists & Their Artist Influences</h1> */}
       {loading ? <p>Loading...</p> : <DataTable data={data} columns={['artistLabel', 'genreLabel', 'influencedLabel']} />}
 
       {/* Primul grafic pentru genreLabel */}

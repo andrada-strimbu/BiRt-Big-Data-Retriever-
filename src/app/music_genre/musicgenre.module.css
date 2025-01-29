@@ -1,0 +1,39 @@
+.musicGenre {
+    /* background-color: red; */
+    display: flex;
+    flex-direction: column;
+    /* justify-content: center; */
+    align-items: center;
+    gap: 30px;
+    width: 100%;
+}
+
+.musicGenre h1 {
+    text-align: center;
+}
+
+.genreSelector {
+    padding: 10px;
+}
+
+.results {
+    margin-bottom: 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.results h2 {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.results table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: center;
+}
+
+.results th, .results td {
+    padding: 10px;
+}

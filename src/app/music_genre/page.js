@@ -2,6 +2,7 @@
 import { useState, useEffect } from 'react';
 import { fetchSPARQLData } from '@/lib/sparql';
 import { MUSIC_GENRES_INFLUENCED_BY, SELECT_GENRE_INFLUENCES_QUERY } from '@/utils/queries';
+import styles from './musicgenre.module.css'
 
 export default function Influences() {
     const [availableGenres, setAvailableGenres] = useState([]);
@@ -57,10 +58,11 @@ export default function Influences() {
 
 
     return (
-        <div style={{ padding: '20px' }}>
+        <div className={styles.musicGenre}>
             <h1>Music Genre Influences</h1>
             <label htmlFor="genreSelect">Select a Music Genre:</label>
             <select
+                className={styles.genreSelector}
                 id="genreSelect"
                 value={selectedGenre}
                 onChange={(e) => setSelectedGenre(e.target.value)}
@@ -76,18 +78,18 @@ export default function Influences() {
             {loading && <p>Loading...</p>}
             {error && <p>Error: {error.message}</p>}
 
-            <div style={{ marginBottom: '50px' }}>
-                <h2 style={{ textAlign: 'center' }}>Genres Table</h2>
-                <table border="1" style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'center' }}>
+            <div className={styles.results}>
+                <h2>Genres Table</h2>
+                <table border="1">
                     <thead>
                         <tr>
-                            <th style={{ padding: '10px' }}> Influenced By</th>
+                            <th> Influenced By</th>
                         </tr>
                     </thead>
                     <tbody>
                         {influences.map((item, index) => (
                             <tr key={index}>
-                                <td style={{ padding: '10px' }}>{item.influencedByLabel?.value || 'N/A'}</td>
+                                <td>{item.influencedByLabel?.value || 'N/A'}</td>
                             </tr>
                         ))}
                     </tbody>
