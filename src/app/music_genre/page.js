@@ -60,26 +60,29 @@ export default function Influences() {
     return (
         <div className={styles.musicGenre}>
             <h1>Music Genre Influences</h1>
-            <label htmlFor="genreSelect">Select a Music Genre:</label>
-            <select
-                className={styles.genreSelector}
-                id="genreSelect"
-                value={selectedGenre}
-                onChange={(e) => setSelectedGenre(e.target.value)}
-            >
-                <option value="">--Select a Genre--</option>
-                {availableGenres.map((genre, index) => (
-                    <option key={index} value={genre.musicGenre?.value || ''}>
-                        {genre.musicGenreLabel?.value || 'Unknown Genre'}
-                    </option>
-                ))}
-            </select>
 
+          <select
+    className={styles.genreSelector}
+    id="genreSelect"
+    value={selectedGenre}
+    onChange={(e) => setSelectedGenre(e.target.value)}
+>
+    <option value="" disabled hidden>
+        Select a Genre...
+    </option>
+    {availableGenres.map((genre, index) => (
+        <option key={index} value={genre.musicGenre?.value || ''}>
+            {genre.musicGenreLabel?.value || 'Unknown Genre'}
+        </option>
+    ))}
+</select>
             {loading && <p>Loading...</p>}
             {error && <p>Error: {error.message}</p>}
 
             <div className={styles.results}>
+
                 <h2>Genres Table</h2>
+
                 <table border="1">
                     <thead>
                         <tr>

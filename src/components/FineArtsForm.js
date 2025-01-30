@@ -2,6 +2,8 @@
 
 import { useEffect, useState } from "react";
 import styles from './fineartsform.module.css'
+import {REGIONS_QUERY} from "@/utils/queries";
+import {fetchSPARQLData} from "@/lib/sparql";
 
 export default function FineArtsForm({ onSubmitForm }) {
     const [startYear, setStartYear] = useState(1900);
@@ -14,12 +16,13 @@ export default function FineArtsForm({ onSubmitForm }) {
             try {
                 console.log('[FETCH REGIONS]...');
                 const cachedRegions = localStorage.getItem('regions');
+                console.log("cachedRegions: ", cachedRegions);
 
                 if (cachedRegions) {
                     console.log('[USING CACHED REGIONS]');
                     const parsedRegions = JSON.parse(cachedRegions);
                     const regionsList = parsedRegions.map((item) => ({
-                        id: `wd:${item.id.split('/')[4]}`,
+                        id: item.id,
                         label: item.label,
                     }));
                     setRegions(regionsList);
@@ -70,7 +73,7 @@ export default function FineArtsForm({ onSubmitForm }) {
                 />
             </div>
 
-            <div className={styles.inputRow}>
+           <div className={styles.inputRow}>
                 <label>Region:</label>
                 <select value={regionQuery} onChange={(e) => setRegionQuery(e.target.value)}>
                     {regions.map((region) => (
@@ -80,6 +83,7 @@ export default function FineArtsForm({ onSubmitForm }) {
                     ))}
                 </select>
             </div>
+
 
             <button type="submit">Search</button>
         </form>

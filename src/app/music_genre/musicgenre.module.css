@@ -1,3 +1,4 @@
+
 .musicGenre {
     /* background-color: red; */
     display: flex;
@@ -7,7 +8,17 @@
     gap: 30px;
     width: 100%;
 }
-
+.genreSelector {
+  padding: 10px;
+    background: #F0EAD2;
+    border-radius: 15px;
+    font-family: 'Arial', sans-serif;
+    font-size: 18px;
+    font-weight: bold;
+    color: #132A13;
+    border: 2px solid #6C584C; /* Bordură pentru un aspect mai definitoriu */
+    transition: all 0.3s ease;
+}
 .musicGenre h1 {
     text-align: center;
 }
@@ -15,25 +26,33 @@
 .genreSelector {
     padding: 10px;
 }
-
-.results {
-    margin-bottom: 50px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.results h2 {
+.results{
+    width: 18%;
     text-align: center;
-    margin-bottom: 30px;
 }
-
 .results table {
     width: 100%;
     border-collapse: collapse;
     text-align: center;
+    background: #31572C;  /* Culoarea de fundal pentru corpul tabelului */
 }
 
 .results th, .results td {
     padding: 10px;
 }
+
+/* Stiluri pentru capul de tabel */
+.results thead {
+    background: #588157;  /* Culoarea de fundal pentru capul de tabel */
+    color: #F0EAD2;          /* Culoarea textului din capul de tabel */
+}
+
+/* Stiluri pentru celulele din corpul tabelului */
+.results tbody tr {
+    background: #F0EAD2; /* Culoarea de fundal pentru rândurile tabelului */
+}
+
+.results tbody tr:nth-child(even) {
+    background: #f0e8d2; /* Culoare diferită pentru rândurile pare (opțional) */
+}
+

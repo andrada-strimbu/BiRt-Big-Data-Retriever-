@@ -1,11 +1,15 @@
 .layoutNav {
-  background-color: #FEFBD8;
-  color: #42202f;
+  background-color: #588157;
+  color: #F0EAD2;
   padding: 30px;
   display: flex;
   justify-content: flex-end;
   gap: 50px;
   position: sticky;
+
+    font-family: 'Arial', sans-serif; /* Schimbă fontul */
+    font-size: 18px; /* Mărimea fontului */
+    font-weight: bold;
   /* width: 100%; */
 }
 
@@ -16,7 +20,7 @@
 }
 
 .projectName {
-  color: #FEFBD8;
+  color: #31572C;
   text-align: center;
   /* background-color: red; */
   /* transform: translateY(50%); */

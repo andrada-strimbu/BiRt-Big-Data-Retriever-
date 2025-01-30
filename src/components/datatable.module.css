@@ -1,54 +1,135 @@
+/* Stil pentru header */
 .header {
     width: 100%;
     display: flex;
-    gap: 30px;
-    justify-content: space-around;
+    justify-content: space-between; /* Mai bine aliniat decât space-around */
     align-items: center;
-    padding: 5px 0;
-    background-color: rgb(88, 48, 54);
-    
+    padding: 10px 20px; /* Mai mult padding pentru un aspect mai aerisit */
+    background-color: #588157; /* Culoare de fundal verde */
+    color: #F0EAD2; /* Text deschis */
+    border-radius: 15px;
+    font-family: 'Arial', sans-serif; /* Fontul folosit */
+    font-size: 20px; /* Mărime font mai mare */
+    font-weight: bold;
+    box-sizing: border-box; /* Asigură că padding-ul nu depășește lățimea */
 }
 
+/* Stil pentru body */
 .body {
+     width: 100%;
     display: flex;
     flex-direction: column;
     gap: 30px;
     overflow-y: auto;
-    max-height: 200px;
+    max-height: 400px; /* Ajustez înălțimea maximă */
+    padding: 10px; /* Adăugăm un pic de padding */
+    box-sizing: border-box;
 }
 
+/* Stil pentru row */
 .row {
     display: flex;
     flex-direction: column;
-    gap: 5px;
+    gap: 10px; /* Mai mult spațiu între rânduri */
 }
 
+/* Stil pentru divv */
 .divv {
-    /* background-color: red; */
-    /* max-width: 700px; */
     display: flex;
     justify-content: space-around;
+    width: 100%; /* Se va întinde pe toată lățimea containerului */
 }
 
 .divv p {
-    /* background-color: aqua; */
-    /* width: 200px; */
     text-align: center;
-    width: 100%;
+    width: 100%; /* Colapsează la 100% din lățimea containerului */
+    font-size: 16px; /* Font mai mic pentru text */
+    color: #432818; /* Culoare text mai închisă */
 }
 
+/* Stil pentru fetchedResults */
 .fetchedResults {
     box-sizing: border-box;
-    background-color: rgb(193, 116, 129);
+    background-color: #F0EAD2;
+    color: #432818;
     display: flex;
     flex-direction: column;
-    /* justify-content: space-around; */
     align-items: center;
     gap: 20px;
+    border-radius: 15px;
+    padding: 20px;
+    width: 80%;
+    margin: 0 auto;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    overflow-x: auto; /* Scroll orizontal doar dacă e necesar */
 }
 
+/* Stil pentru tabel */
+.fetchedResults table {
+    width: 100%;
+    border-collapse: collapse;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+
+.fetchedResults th {
+    padding: 12px;
+    text-align: center;
+    font-size: 18px;
+    border-bottom: 2px solid #432818;
+}
+
+/* Celulele tabelului */
+.fetchedResults td {
+    padding: 12px;
+    border-bottom: 1px solid #A68A64;
+    font-size: 16px;
+    text-align: center;
+}
+
+/* Alternare culori rânduri */
+.fetchedResults tbody tr:nth-child(even) {
+    background-color: #EADBC8;
+}
+
+/* Hover pe rânduri */
+.fetchedResults tbody tr:hover {
+    background-color: #D4A373;
+    color: #fff;
+}
+
+
+/* Responsivitate pentru dispozitive mici */
 @media screen and (max-width: 500px) {
     .fetchedResults {
-        max-width: 300px;
+        max-width: 100%;
+        padding: 15px;
+    }
+
+    .fetchedResults table {
+        display: block;
+        overflow-x: auto;
+    }
+
+    .fetchedResults th, .fetchedResults td {
+        font-size: 14px;
+        padding: 8px;
+    }
+
+    /* Pentru .header */
+    .header {
+        flex-direction: column; /* Pe ecrane mici, header-ul devine pe verticală */
+        gap: 15px; /* Mai puțin gap între elemente */
+        text-align: center; /* Aliniere pe centru */
+    }
+
+    /* Ajustăm body */
+    .body {
+        max-height: 350px; /* Mai mult spațiu disponibil pentru body */
+    }
+
+    .row {
+        gap: 15px; /* Spatiere mai mare între elemente pe dispozitive mici */
     }
 }

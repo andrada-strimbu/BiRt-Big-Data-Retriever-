@@ -60,7 +60,7 @@ const MusicPage = () => {
       .scaleBand()
       .domain(labels)  // Folosim stilurile muzicale ca etichete
       .range([margin.left, width - margin.right])
-      .padding(0.2);
+      .padding(0.5);
 
     const yScale = d3
       .scaleLinear()
@@ -70,17 +70,26 @@ const MusicPage = () => {
 
     // Adăugăm axa X
     svg
-      .append('g')
-      .attr('class', 'x-axis')
-      .attr('transform', `translate(0,${height - margin.bottom})`)
-      .call(d3.axisBottom(xScale));
-
+  .append('g')
+  .attr('class', 'x-axis')
+  .attr('transform', `translate(0,${height - margin.bottom})`)
+  .call(d3.axisBottom(xScale))
+  .selectAll('text')
+  .style('fill', '#111') // Culoarea textului axei X
+  .style('font-size', '12px') // Dimensiunea fontului
+  .style('font-weight', 'bold')
+  .attr('transform', 'rotate(-30)') // Opțional: înclină textul pentru lizibilitate
+  .style('text-anchor', 'end');
     // Adăugăm axa Y
     svg
-      .append('g')
-      .attr('class', 'y-axis')
-      .attr('transform', `translate(${margin.left}, 0)`)
-      .call(d3.axisLeft(yScale));
+  .append('g')
+  .attr('class', 'y-axis')
+  .attr('transform', `translate(${margin.left}, 0)`)
+  .call(d3.axisLeft(yScale))
+  .selectAll('text')
+  .style('fill', '#111') // Culoarea textului axei Y
+  .style('font-size', '12px')
+  .style('font-weight', 'bold');
 
     // Creăm barele pentru fiecare stil
     svg
@@ -94,7 +103,7 @@ const MusicPage = () => {
       .attr('y', (d) => yScale(d))  // Înălțimea fiecărei bare
       .attr('width', xScale.bandwidth())  // Lățimea barei
       .attr('height', (d) => height - margin.bottom - yScale(d))  // Înălțimea fiecărei bare
-      .attr('fill', '#69b3a2');
+      .attr('fill', '#588157');
   };
 
   return (
