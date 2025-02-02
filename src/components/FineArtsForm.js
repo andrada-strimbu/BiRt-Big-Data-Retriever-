@@ -12,23 +12,31 @@ export default function FineArtsForm({ onSubmitForm }) {
     const [regions, setRegions] = useState([]);
 
     useEffect(() => {
+        
         const fetchRegions = async () => {
+            console.log("use effect");
             try {
                 console.log('[FETCH REGIONS]...');
                 const cachedRegions = localStorage.getItem('regions');
-                console.log("cachedRegions: ", cachedRegions);
-
+                // console.log("cachedRegions: ", cachedRegions);
+                // console.log("Local storage: ", localStorage.getItem('regions'));
                 if (cachedRegions) {
                     console.log('[USING CACHED REGIONS]');
                     const parsedRegions = JSON.parse(cachedRegions);
+                    console.log("[IF]parsed regions: ", parsedRegions);
                     const regionsList = parsedRegions.map((item) => ({
                         id: item.id,
+                        // id: `wd:${item.region.value.split('/')[4]}`,
                         label: item.label,
                     }));
+                    console.log("regions List: ", regionsList);
                     setRegions(regionsList);
                     setRegionQuery(parsedRegions[0]?.id || ''); // Set default region
                 } else {
+                    console.log("ELSE");
+                    // localStorage.clear();
                     const results = await fetchSPARQLData(REGIONS_QUERY);
+                    console.log("[ELSE]results: ", results);
                     const regionsList = results.map((item) => ({
                         id: `wd:${item.region.value.split('/')[4]}`,
                         label: item.regionLabel.value,
@@ -44,6 +52,10 @@ export default function FineArtsForm({ onSubmitForm }) {
             }
         };
         fetchRegions();
+        // return () => {
+        //    
+        // }
+       
     }, []);
 
 

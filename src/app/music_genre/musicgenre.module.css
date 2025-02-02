@@ -8,6 +8,7 @@
     gap: 30px;
     width: 100%;
 }
+
 .genreSelector {
   padding: 10px;
     background: #F0EAD2;
@@ -23,9 +24,19 @@
     text-align: center;
 }
 
+.musicGenre button {
+    background-color: #F0EAD2;
+    padding: 5px;
+    font-weight: bold;
+    color: #132A13;
+    border-radius: 10px;
+}
+
+
 .genreSelector {
     padding: 10px;
 }
+
 .results{
     width: 18%;
     text-align: center;

@@ -44,15 +44,6 @@ export const GENRE_INFLUENCES_QUERY = `
 `;
 
 
-// ex: de ce genuri a fost influentat doom metal (Q186170)
-// PREFIX wdt: <http://www.wikidata.org/prop/direct/>
-// SELECT ?influencedBy ?influencedByLabel
-// WHERE {
-//   wd:Q186170 wdt:P737 ?influencedBy.
-//   SERVICE wikibase:label { bd:serviceParam wikibase:language "en". }
-// }
-// LIMIT 10
-
 
 //Query pt genurile muzicale care contin proprietatea "influenced by"
 export const MUSIC_GENRES_INFLUENCED_BY = `PREFIX wd: <http://www.wikidata.org/entity/>
@@ -130,5 +121,46 @@ export const REGIONS_QUERY = `
   ORDER BY ?regionLabel
 `;
 
-
 // ORDER BY ?artistLabel
+
+
+// export const SONGS_RECOMMENDATION_QUERY = (genreID) => `
+//   PREFIX wd: <http://www.wikidata.org/entity/>
+// PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+
+// SELECT DISTINCT ?song ?songLabel ?artistLabel
+// WHERE {
+//   ?song wdt:P31 wd:Q7366;   # Must be an instance of "song"
+//         wdt:P136 ${genreID}; # Example: Rock (Q11399)
+//         wdt:P175 ?artist.   # Performer (artist)
+  
+//   SERVICE wikibase:label { bd:serviceParam wikibase:language "en". }
+// }
+// LIMIT 20
+// `
+
+
+export const SONGS_RECOMMENDATION_QUERY = (genreID) => `
+PREFIX wd: <http://www.wikidata.org/entity/>
+PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+PREFIX schema: <http://schema.org/>
+
+SELECT DISTINCT ?song ?songLabel ?artist ?artistLabel ?language ?artistDescription
+WHERE {
+  ?song wdt:P31 wd:Q7366;   # Must be an instance of "song"
+        wdt:P136 ${genreID}; # Example: Rock (Q11399)
+        wdt:P175 ?artist.   # Performer (artist)
+  
+  SERVICE wikibase:label { bd:serviceParam wikibase:language "en". }
+
+  # Fetch artist descriptions, but only in selected languages
+  OPTIONAL {
+    ?artist schema:description ?artistDescription.
+    BIND(LANG(?artistDescription) AS ?language)
+    FILTER(?language IN ("en", "fr", "de", "it"))  # Keep only Spanish, French, German, Italian
+  }
+}
+LIMIT 20
+
+
+`

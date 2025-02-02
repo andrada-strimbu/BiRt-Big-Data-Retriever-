@@ -1,7 +1,7 @@
 'use client';
 import React, { useState, useEffect } from 'react';
 import { fetchSPARQLData } from '@/lib/sparql';
-import { FINE_ARTS_QUERY_WITH_FILTERS, REGIONS_QUERY } from '@/utils/queries';
+import { FINE_ARTS_QUERY_WITH_FILTERS } from '@/utils/queries';
 import DataTable from '@/components/DataTable';
 import styles from './finearts.module.css';
 import FineArtsForm from '@/components/FineArtsForm';
@@ -11,12 +11,13 @@ import FineArtsChart from "@/app/finearts/FineArtsChart";
 const FineArtsPage = () => {
   const [loading, setLoading] = useState(false);
   const [data, setData] = useState([]);
-  const [chartData, setChartData] = useState([]);
+  // const [chartData, setChartData] = useState([]);
 
   const handleSearch = async (startYear, endYear, regionQuery) => {
     setLoading(true);
     try {
       const query = FINE_ARTS_QUERY_WITH_FILTERS(startYear, endYear, regionQuery);
+      console.log("query: ", query);
       const results = await fetchSPARQLData(query);
       setData(results);
 
@@ -28,7 +29,7 @@ const FineArtsPage = () => {
       }, {});
 
       // Setăm datele pentru grafic
-      setChartData(Object.entries(groupedData).map(([artist, count]) => ({ artist, count })));
+      // setChartData(Object.entries(groupedData).map(([artist, count]) => ({ artist, count })));
 
     } catch (error) {
       console.error('Error during search:', error);
