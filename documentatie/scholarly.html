@@ -8,318 +8,435 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link
-          href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600;700&display=swap"
-          rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600;700&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="read.css">
   <link rel="stylesheet" href="scholarly.css">
 </head>
 
 <body>
-<article>
-  <header>
-    <h1>BiRt (Big Data Retriever)</h1>
-    <h2>Content</h2>
+  <article>
+    <header>
+      <h1>BiRt (Big Data Retriever)</h1>
+      <h2>Content</h2>
+      </section>
+      <ol role="directory">
+        <li><a href="#introduction">Introduction</a>
+          <ol role="introduction-directory">
+            <li><a href="#introduction__purpose">Purpose of the Document</a></li>
+            <li><a href="#introduction__audience">Target Audience and Suggestions</a></li>
+            <li><a href="#introduction__product-scope">Application Scope</a></li>
+          </ol>
+        </li>
+        <li><a href="#overall-description">Overall Description</a>
+          <ol role="overall-description-directory">
+            <li><a href="#overall-description__product-perspective">Product Perspective</a></li>
+            <li><a href="#overall-description__product-functions">Product Functionalities</a></li>
+            <li><a href="#overall-description__design-constraints">Design and Implementation Constraints</a></li>
+          </ol>
+        </li>
+        <li><a href="#technical-architecture">Architecture and Technical Aspects</a>
+          <ol role="technical-architecture-directory">
+            <li><a href="#technical-architecture__system">System Architecture</a></li>
+            <li><a href="#technical-architecture__data-flows">Data Flows</a></li>
+            <li><a href="#technical-architecture__wikidata-integration">SPARQL Query to Wikidata</a></li>
+            <li><a href="#technical-architecture__backend">Data Processing by the Backend</a></li>
+            <li><a href="#technical-architecture__frontend">API Response to the Frontend</a></li>
+            <li><a href="#technical-architecture__frontend_visualization">Data Visualization on the Frontend</a></li>
+          </ol>
+        </li>
+
+        <li><a href="#rdf-model">RDF Model and Linked Data</a>
+          <ol role="rdf-model-directory">
+            <li><a href="#rdf-model__vocabulary">Vocabulary/Ontology Used</a></li>
+            <li><a href="#rdf-model__example">Example RDF Model</a></li>
+          </ol>
+        </li>
+
+        <li><a href="#user-documentation">User Documentation</a>
+          <ol role="user-documentation-directory">
+            <li><a href="#user-documentation__navigation">Navigation</a></li>
+            <li><a href="#user-documentation__routes">Routes</a></li>
+          </ol>
+        </li>
+        <li><a href="#conclusions">Conclusions and Future Work</a>
+          <ol role="conclusions-directory">
+            <li><a href="#conclusions__summary">Conclusions</a></li>
+            <li><a href="#conclusions__future-directions">Future Directions</a></li>
+          </ol>
+        </li>
+
+
+
+
+      </ol>
+      </div>
+    </header>
+    <section id="introduction" role="doc-introduction">
+      <h2>1. Introduction</h2>
+      <section id="introduction__purpose" role="doc-introduction">
+        <h3>1.1 Purpose of the Document</h3>
+
+        <p>
+          This document serves as a high-level guide for the development of the platform. Its purpose is to outline the
+          scope, technical approach and overall
+          goals for the project, including the intended features, technologies and use cases. It will also discuss the
+          potential benefits of such a system and
+          the challenges involved in building a robust and scalable data platform.
+        </p>
+      </section>
+      <section id="introduction__audience" role="doc-introduction">
+        <h3>1.2 Target Audience and Suggestions</h3>
+
+        <!--------------------- PROPUNERE -> de adaugat ------------->
+        <!-- <p>
+          The target audience for this platform includes music enthusiasts, researchers, students, educators,
+          developers, data scientists, and linguists.
+          Music lovers can explore different genres, understand their influences, and discover recommended songs and
+          artists. Researchers and musicologists
+          can analyze the evolution of musical styles and cultural connections using linked open data. Students and
+          educators can use the platform as an educational
+          tool for studying music history and influences. Developers and data scientists working with SPARQL queries and
+          Wikidata can leverage the system for research
+          or software development. Additionally, linguists and translators can explore multilingual descriptions of
+          artists and genres, gaining insights into how music-related information varies across languages.
+        </p> -->
+
+        <p>
+          The target audience for this project includes several groups of users. Among them are researchers working in
+          data-intensive fields such as social sciences, humanities, and natural sciences, who need access to structured
+          data and efficient querying mechanisms. The platform will also be aimed at developers and data engineers who
+          will build, maintain, and scale the platform, working with tools like SPARQL and big data technologies.
+          Additionally, it will serve data analysts interested in comparing and visualizing large datasets to derive
+          useful insights. Finally, end users, who wish to explore specific topics such as artists, historical events,
+          or geographical trends, will benefit from recommendations and insights across different languages.
+        </p>
+        <!-- de sters -->
+        <!-- <p>
+          For each of these groups, the platform will address different needs. Researchers will be attracted to the
+          platform’s ability to offer advanced search and comparison features, especially for cross-lingual and
+          cross-domain data discovery. Developers will appreciate the modularity and scalability of the platform's
+          architecture for handling large-scale data queries. Data analysts will be interested in the platform’s data
+          visualization tools, which will aid in the understanding of complex datasets. End users will want a simple and
+          intuitive interface, with clear recommendations and summaries of the data they obtain.
+        </p> -->
+        <!-- -->
+
+      </section>
+      <section id="introduction__product-scope" role="doc-introduction">
+        <h3>1.3 Application Scope</h3>
+
+        <p>
+          The primary goal of the platform is to facilitate intelligent querying, comparison, and visualization of data
+          from various domains available on Wikidata and related sources. The application will provide essential
+          functionalities, such as a powerful SPARQL query engine, which will allow users to run complex queries on
+          Wikidata to retrieve relevant data. It will also include comparison tools for large datasets across different
+          domains, such as comparing artworks across different time periods or the influences of music styles on other
+          genres. The platform will offer advanced data visualization features, which will help users quickly understand
+          and analyze information through visual representations.
+
+        </p>
+      </section>
     </section>
-    <ol role="directory">
-     	<li><a href="#introduction">Introduction</a>
-  		<ol role="introduction-directory">
-    		<li><a href="#introduction__purpose">Purpose of the Document</a></li>
-    		<li><a href="#introduction__audience">Target Audience and Suggestions</a></li>
-   		<li><a href="#introduction__product-scope">Application Scope</a></li>
-  		</ol>
-	</li>
-     	<li><a href="#overall-description">Overall Description</a>
- 	 	<ol role="overall-description-directory">
-    		<li><a href="#overall-description__product-perspective">Product Perspective</a></li>
-   		<li><a href="#overall-description__product-functions">Product Functionalities</a></li>
-   		<li><a href="#overall-description__design-constraints">Design and Implementation Constraints</a></li>
-  		</ol>
-	</li>
-	<li><a href="#technical-architecture">Architecture and Technical Aspects</a>
- 		<ol role="technical-architecture-directory">
-    		<li><a href="#technical-architecture__system">System Architecture</a></li>
-   	  	<li><a href="#technical-architecture__data-flows">Data Flows</a></li>
-    		<li><a href="#technical-architecture__wikidata-integration">SPARQL Query to Wikidata</a></li>
-        <li><a href="#technical-architecture__backend">Data Processing by the Backend</a></li>
-   	  	<li><a href="#technical-architecture__frontend">API Response to the Frontend</a></li>
-    		<li><a href="#technical-architecture__frontend_visualization">Data Visualization on the Frontend</a></li>
-		</ol>
-	</li>
+    <section id="overall-description" role="overall-description-directory">
+      <h2>2. Overall Description</h2>
+      <section id="overall-description__product-perspective" role="overall-description-directory">
+        <h3>2.1 Product Perspective</h3>
 
-	<li><a href="#rdf-model">RDF Model and Linked Data</a>
-  		<ol role="rdf-model-directory">
-    		<li><a href="#rdf-model__vocabulary">Vocabulary/Ontology Used</a></li>
-    		<li><a href="#rdf-model__example">Example RDF Model</a></li>
-  		</ol>
-	</li>
-
-	<li><a href="#user-documentation">User Documentation</a>
-  		<ol role="user-documentation-directory">
-  		<li><a href="#user-documentation__navigation">Navigation</a></li>
-    		<li><a href="#user-documentation__routes">Routes</a></li>
-  		</ol>
-	</li>
-	<li><a href="#conclusions">Conclusions and Future Work</a>
-  		<ol role="conclusions-directory">
-    		<li><a href="#conclusions__summary">Conclusions</a></li>
-    		<li><a href="#conclusions__future-directions">Future Directions</a></li>
-  		</ol>
-	</li>
-
-
-
-
-    </ol>
-    </div>
-  </header>
-  <section id="introduction" role="doc-introduction">
-    <h2>1. Introducere</h2>
-    <section id="introduction__purpose" role="doc-introduction">
-      <h3>1.1 Purpose of the Document</h3>
-  
-      <p>
-     This document serves as a high-level guide for the development of the platform. Its purpose is to outline the scope, technical approach, and overall goals for the project, including the intended features, technologies, and use cases. It will also discuss the potential benefits of such a system and the challenges involved in building a robust and scalable data platform.
-      </p>
-    </section>
-    <section id="introduction__audience" role="doc-introduction">
-      <h3>1.2 Target Audience and Suggestions</h3>
- 
-      <p>
-        The target audience for this project includes several groups of users. Among them are researchers working in data-intensive fields such as social sciences, humanities, and natural sciences, who need access to structured data and efficient querying mechanisms. The platform will also be aimed at developers and data engineers who will build, maintain, and scale the platform, working with tools like SPARQL and big data technologies. Additionally, it will serve data analysts interested in comparing and visualizing large datasets to derive useful insights. Finally, end users, who wish to explore specific topics such as artists, historical events, or geographical trends, will benefit from recommendations and insights across different languages.
-       </p>
-      <p>
-For each of these groups, the platform will address different needs. Researchers will be attracted to the platform’s ability to offer advanced search and comparison features, especially for cross-lingual and cross-domain data discovery. Developers will appreciate the modularity and scalability of the platform's architecture for handling large-scale data queries. Data analysts will be interested in the platform’s data visualization tools, which will aid in the understanding of complex datasets. End users will want a simple and intuitive interface, with clear recommendations and summaries of the data they obtain.
-      </p>
-    </section>
-    <section id="introduction__product-scope" role="doc-introduction">
-      <h3>1.3 Application Scope</h3>
-
-      <p>
-The primary goal of the platform is to facilitate intelligent querying, comparison, and visualization of data from various domains available on Wikidata and related sources. The application will provide essential functionalities, such as a powerful SPARQL query engine, which will allow users to run complex queries on Wikidata to retrieve relevant data. It will also include comparison tools for large datasets across different domains, such as comparing artworks across different time periods or the influences of music styles on other genres. The platform will offer advanced data visualization features, which will help users quickly understand and analyze information through visual representations like charts, maps, graphs, and timelines.
-
-      </p>
-    </section>
-  </section>
-  <section id="overall-description" role="overall-description-directory">
-    <h2>2. Overall Description</h2>
-    <section id="overall-description__product-perspective" role="overall-description-directory">
-      <h3>2.1 Product Perspective</h3>
-
-      <p>BiRt (Big Data Retriever) is a web-based system that automatically retrieves and processes data about artists and music from Wikidata,
-         generating visual charts.The application uses SPARQL queries to extract data about artists, albums, musical genres, and popularity metrics. 
-         The retrieved information is processed and automatically displayed as interactive charts using D3.js.
-      </p>
-    </section>
-    <section id="overall-description__product-functions" role="overall-description-directory">
-      <h3>2.2 Product Functionalities</h3>
+        <p>BiRt (Big Data Retriever) is a web-based system that automatically retrieves and processes data about artists
+          and music from Wikidata, generating visual charts. The application uses SPARQL queries to extract data about
+          artists, albums, musical genres, and popularity metrics.
+          The retrieved information is processed and automatically displayed as interactive charts using D3.js.
+        </p>
+      </section>
+      <section id="overall-description__product-functions" role="overall-description-directory">
+        <h3>2.2 Product Functionalities</h3>
         <p></p>
-      <p> <strong>Discover Painters by Time Period, Country & Statistics</strong></p>
-      <p>On the first page, users input:</p>
-      <ul>
+        <p> <strong>Discover Painters by Time Period, Country & Statistics</strong></p>
+        <p>On the first page, users input:</p>
+        <ul>
           <li>A <strong>start year</strong> and an <strong>end year</strong> to define the time period.</li>
           <li>A <strong>country</strong> to filter painters by their place of origin.</li>
-      </ul>
-      <p>The application then retrieves and displays:</p>
-      <ul>
+        </ul>
+        <p>The application then retrieves and displays:</p>
+        <ul>
           <li>A list of painters who were active in the selected period and country.</li>
           <li>Statistics on paintings, including:
-              <ul>
-                  <li>The <strong>number of paintings</strong> created by each painter in the list.</li>
-                  <li>A <strong>visual breakdown of artistic output</strong> within the selected time frame.</li>
-                  <li>Charts comparing the <strong>productivity of different painters</strong>.</li>
-              </ul>
+            <ul>
+              <li>The <strong>number of paintings</strong> created by each painter in the list.</li>
+              <li>A <strong>visual breakdown of artistic output</strong> within the selected time frame.</li>
+              <li>Charts comparing the <strong>productivity of different painters</strong>.</li>
+            </ul>
           </li>
-      </ul>
-      <p><strong> Music Artists & Their Influences</strong><p>
-            <p>The second page focuses on musical artists and their influences, allowing users to:</p>
-            <ul>
-                <li>Discover which <strong>artists influenced others</strong>, revealing direct artistic inspiration.</li>
-                <li>Explore <strong>connections across different time periods and genres</strong>.</li>
-                <li>View the relationships in an <strong>interactive network graph</strong>, making it easy to see how musical ideas spread between artists.</li>
-            </ul>
-            <p><strong> Music Genre Influences</strong></p>
-            <p>The third page provides insights into how different music genres have influenced one another, helping users:</p>
-            <ul>
-                <li>Track the evolution of genres, such as how <strong>Classical music influenced Jazz</strong>, or how <strong>Blues led to Rock</strong>.</li>
-                <li>Analyze <strong>genre interconnections</strong>, seeing which styles share common roots.</li>
-                <li>Explore <strong>historical trends</strong>, with charts displaying how various genres grew or declined in popularity over time.</li>
-            </ul>
-     </section>
+        </ul>
+        <p><strong> Music Artists & Their Influences</strong>
+        <p>
+        <p>The second page focuses on musical artists and their influences, allowing users to:</p>
+        <ul>
+          <li>Discover which <strong>artists influenced others</strong>, revealing direct artistic inspiration.</li>
+          <li>Explore <strong>connections across different time periods and genres</strong>.</li>
+          <li>View the relationships in an <strong>interactive network graph</strong>, making it easy to see how musical
+            ideas spread between artists.</li>
+        </ul>
+        <!-- DE ADAUGAT -->
+        <p>The data displayed on this page is randomly selected to encourage users to discover new artists and gain
+          fresh insights. By presenting different artists each time, the platform fosters exploration and helps users
+          uncover musical influences they might not have encountered otherwise. </p>
+
+        <p><strong> Music Genre Influences</strong></p>
+        <p>
+          The third webpage allows users to explore the influences behind a selected music genre.
+        </p>
+        <ul>
+          <li>
+            The page displays which genres contributed to the development of the selected genre.
+          </li>
+          <li>
+            Insights into the genre's evolution and stylistic roots are provided.
+          </li>
+          <li>
+            If available, song recommendations from the selected genre are displayed.
+          </li>
+          <li>
+            Users can discover new music while understanding genre connections.
+          </li>
+        </ul>
+      </section>
       <section id="overall-description__design-constraints" role="overall-description-directory">
         <h3>2.3 Design and Implementation Constraints </h3>
         <p></p>
         <p><strong>2.3.1 Framework: Next.js</strong></p>
-        <p> Next.js is a popular, open-source React framework used for building web applications with various rendering options. 
-        It offers a number of advantages that fit well with the needs of your application. Key Features:</p>
+        <p> Next.js is a popular, open-source React framework used for building web applications with various rendering
+          options.
+          It offers a number of advantages that fit well with the needs of your application. Key Features:</p>
         <ul>
-          <li> <strong>Server-Side Rendering (SSR)</strong>: This means that pages are rendered on the server, and the fully generated HTML is sent to the browser, rather than relying on client-side JavaScript to generate the content. SSR is particularly useful for improving SEO and page load times. 
-            When a user requests a page, the server handles the rendering, and the page is ready to be displayed in the browser almost instantly.</li>
-          <li><strong>Static Site Generation (SSG)</strong>: This is another rendering option that Next.js supports. SSG pre-renders pages at build time,
-               allowing for fast load times and better performance when serving static content.</li>
-          <li><strong>API Routes</strong>: Next.js allows you to define API routes within the same project as your frontend. This means you don't need a separate backend server to handle data requests; Next.js can manage both the frontend and backend functionality.
-             API routes in Next.js provide the ideal way to interact with Wikidata by running SPARQL queries directly from the application.</li> 
+          <li> <strong>Server-Side Rendering (SSR)</strong>: This means that pages are rendered on the server, and the
+            fully generated HTML is sent to the browser, rather than relying on client-side JavaScript to generate the
+            content. SSR is particularly useful for improving SEO and page load times.
+            When a user requests a page, the server handles the rendering, and the page is ready to be displayed in the
+            browser almost instantly.</li>
+          <li><strong>Static Site Generation (SSG)</strong>: This is another rendering option that Next.js supports. SSG
+            pre-renders pages at build time,
+            allowing for fast load times and better performance when serving static content.</li>
+          <li><strong>API Routes</strong>: Next.js allows you to define API routes within the same project as your
+            frontend. This means you don't need a separate backend server to handle data requests; Next.js can manage
+            both the frontend and backend functionality.
+            API routes in Next.js provide the ideal way to interact with Wikidata by running SPARQL queries directly
+            from the application.</li>
         </ul>
 
-       <p><strong>2.3.2 Data Handling: Next.js API Routes  </p></strong>
-       <p>Since Next.js combines both the frontend and backend in the same project, API routes act as internal backend endpoints that can manage server-side logic such as fetching data from external sources (like Wikidata) and processing it. 
-        These routes allow you to structure the backend logic without needing an independent backend framework.<p>
-          <ul>
-            <li><strong>Seamless Data Fetching</strong>: API routes in Next.js allow you to handle complex queries to external data sources, like Wikidata, without the need for separate backend services.
-               When a user interacts with the frontend, the API route is called to fetch data, process it, and send a response back to the frontend.</li>
-            <li><strong>Flexible Data Processing</strong>: Once data is fetched from Wikidata via SPARQL queries, it might need additional processing (e.g., calculating statistics, filtering data, or formatting it).
-               API routes make it easy to process the data and format it according to the needs of the frontend.</li>
-          </ul>
+        <p><strong>2.3.2 Data Handling: Next.js API Routes </p></strong>
+        <p>Since Next.js combines both the frontend and backend in the same project, API routes act as internal backend
+          endpoints that can manage server-side logic such as fetching data from external sources (like Wikidata) and
+          processing it.
+          These routes allow you to structure the backend logic without needing an independent backend framework.
+        <p>
+        <ul>
+          <li><strong>Seamless Data Fetching</strong>: API routes in Next.js allow you to handle complex queries to
+            external data sources, like Wikidata, without the need for separate backend services.
+            When a user interacts with the frontend, the API route is called to fetch data, process it, and send a
+            response back to the frontend.</li>
+          <li><strong>Flexible Data Processing</strong>: Once data is fetched from Wikidata via SPARQL queries, it might
+            need additional processing (e.g., calculating statistics, filtering data, or formatting it).
+            API routes make it easy to process the data and format it according to the needs of the frontend.</li>
+        </ul>
 
 
 
-       <p><strong>2.3.3 Data Visualization: D3.js</strong></p>
+        <p><strong>2.3.3 Data Visualization: D3.js</strong></p>
 
-        <p>D3.js is a powerful JavaScript library for creating data visualizations. It allows you to manipulate the DOM (Document Object Model)
-           and bind data to elements on the page, enabling the creation of dynamic and interactive graphics, charts, and graphs.</p>
+        <p>D3.js is a powerful JavaScript library for creating data visualizations. It allows you to manipulate the DOM
+          (Document Object Model)
+          and bind data to elements on the page, enabling the creation of dynamic and interactive graphics, charts, and
+          graphs.</p>
 
         <ul>
-          <li><strong>Customizable Visualizations</strong>: D3.js offers advanced features for creating highly customized charts and visualizations. This means that you can create complex, interactive visualizations like network graphs, bar charts, pie charts, or any other custom graphic that suits your data.</li>
-          <li><strong>Data Manipulation</strong>: D3.js excels at transforming data into visual elements, which is key when dealing with large datasets or requiring advanced manipulations (such as sorting, filtering, or grouping data).</li>
+          <li><strong>Customizable Visualizations</strong>: D3.js offers advanced features for creating highly
+            customized charts and visualizations. This means that you can create complex, interactive visualizations
+            like network graphs, bar charts, pie charts, or any other custom graphic that suits your data.</li>
+          <li><strong>Data Manipulation</strong>: D3.js excels at transforming data into visual elements, which is key
+            when dealing with large datasets or requiring advanced manipulations (such as sorting, filtering, or
+            grouping data).</li>
         </ul>
 
         <p><strong>2.3.4 Wikidata Interaction: SPARQL Endpoint</p></strong>
-        <p>Wikidata is a large, open-source, structured knowledge base that stores data in RDF (Resource Description Framework) format. RDF data is ideal for representing complex relationships, which is why it’s commonly used for things
-           like linked data, ontologies, and knowledge graphs. To query this data, you use SPARQL, a query language designed for querying RDF data. SPARQL allows you to retrieve specific information from Wikidata based on criterias.</p>
+        <p>Wikidata is a large, open-source, structured knowledge base that stores data in RDF (Resource Description
+          Framework) format. RDF data is ideal for representing complex relationships, which is why it’s commonly used
+          for things
+          like linked data, ontologies, and knowledge graphs. To query this data, you use SPARQL, a query language
+          designed for querying RDF data. SPARQL allows you to retrieve specific information from Wikidata based on
+          criterias.</p>
         <ul>
-          <li><strong>Efficient Data Retrieval</strong> : SPARQL is highly efficient at retrieving structured data from large datasets like Wikidata. 
+          <li><strong>Efficient Data Retrieval</strong> : SPARQL is highly efficient at retrieving structured data from
+            large datasets like Wikidata.
             You can filter and retrieve specific data based on the conditions you define in your queries.</li>
-            <li><strong>Flexibility in Querying</strong>: SPARQL allows for complex queries that can retrieve multiple types of information in a single query. For example, you can request data about an artist's works, the creation years of those works, and the artist’s country of origin all in one query. </li>
-            <li><strong>Integration with Wikidata</strong>: Wikidata’s SPARQL endpoint is publicly accessible, meaning that you can directly query the database from your application without the need for a separate data collection process.</li>
-          </ul>
+          <li><strong>Flexibility in Querying</strong>: SPARQL allows for complex queries that can retrieve multiple
+            types of information in a single query. For example, you can request data about an artist's works, the
+            creation years of those works, and the artist’s country of origin all in one query. </li>
+          <li><strong>Integration with Wikidata</strong>: Wikidata’s SPARQL endpoint is publicly accessible, meaning
+            that you can directly query the database from your application without the need for a separate data
+            collection process.</li>
+        </ul>
         <p><strong>2.3.5 Hosting & Deployment:</p></strong>
 
-</section>
+      </section>
 
-      
-    <section id="technical-architecture" role="technical-architecture-directory">
-      <h2>3. Architecture and Technical Aspects</h2>
-      <section id="technical-architecture__system" role="technical-architecture-directory">
-        <h3>3.1 System features</h3>
-        <figure>
-          <p>Fine Arts</p>
-          <img src="screenshot/finearts1.png" alt="Fine Arts" style="width: 500px; height: auto" />
-        </figure>
-        <figure>
-          <img src="screenshot/finearts2.png" alt="Fine Arts" style="width: 500px; height: auto" />
-        </figure>
-        <figure>
-          <p>Music(WIP)</p>
-          <img src="screenshot/music1.png" alt="Music(WIP)" style="width: 500px; height: auto" />
-        </figure>
-        <figure>
-          <p>Music(WIP)</p>
-          <img src="screenshot/music2.png" alt="Music(WIP)" style="width: 500px; height: auto" />
-        </figure>
-        <figure>
-          <p>Music Genre</p>
-          <img src="screenshot/musicgenre1.png" alt="Music Genre" style="width: 500px; height: auto" />
-        </figure>
-       </section>
-      <section id="technical-architecture__data-flows" role="technical-architecture-directory">
-        <h3>3.2 Data Flows</h3>
-          <p>The application interacts with Wikidata through SPARQL queries to gather information about artists, their influences, and the evolution of music genres.
-             Below, we will describe how data is retrieved, processed, and transmitted between the application's components:</p>
-             <p><strong> 3.2.1 User Inputs Data </strong></p>
-             <p>The user initiates the search process by filling out a form on the frontend, where they can specify:</p> 
-             <ul>
-              <li><strong>Time range</strong> (Start Year and End Year) to filter the data.</li>
-              <li><strong>Country</strong> to filter artists by their place of origin (for painters).</li>
-              <li><strong>Music Genre</strong> or <strong>Artist</strong> to explore musical influences.</li>
-             </ul>
-             <p>This data is sent to the backend via an HTTP request (GET or POST) that includes the specified parameters for the SPARQL query.</p>
 
-             <p><strong> 3.2.2 API Request to the Backend</strong></p>
-             <p>The backend (Next.js) receives the user's request and constructs the corresponding SPARQL query based on the user's input.</p> 
-              <p> <strong>3.2.2.1</strong> For Painters: If the user specifies a time period and a country, the backend will use the <strong>FINE_ARTS_QUERY_WITH_FILTERS</strong> query, which includes a filter for the start and end year, as well as the selected country. The query looks like this:</p>
-              <figure>
-                <img src="screenshot/queries6.png" alt="FINE_ARTS_QUERY_WITH_FILTERS" style="width: 500px; height: auto" />
-              </figure>
-              <p><strong>3.2.2.2</strong> For Music Artists and Their Influences: If the user wants to see the influences of a specific music artist, the backend will use the <strong>MUSIC_INFLUENCES_QUERY</strong>, which searches for musical artists and their influences based on the region (e.g., artists from the United States):</p>
-              <figure>
-                <img src="screenshot/queries2.png" alt="MUSIC_INFLUENCES_QUERY" style="width: 500px; height: auto" />
-              </figure>
-              <p><strong>3.2.2.3</strong> For music genre influences:The backend uses the query <strong>GENRE_INFLUENCES_QUERY</strong>, which retrieves a list of music genres and how they influenced other genres</p>
-              <figure>
-                <img src="screenshot/queries3.png" alt="GENRE_INFLUENCES_QUERY" style="width: 500px; height: auto" />
-              </figure>
-              <p><strong>3.2.2.4</strong> If the user is exploring how specific genres are influenced by other genres:The backend uses the query <strong>MUSIC_GENRES_INFLUENCED_BY</strong>.
-                <figure>
-                <img src="screenshot/queries4.png" alt="MUSIC_GENRES_INFLUENCED_BY" style="width: 500px; height: auto" />
-              </figure>
-              <p><strong>3.2.2.5</strong> For exploring influences of a specific genre (e.g., "Doom Metal"):The backend constructs a dynamic query using <strong>SELECT_GENRE_INFLUENCES_QUERY</strong>, where selectedGenre is replaced with the specific genre ID.</p>
-                <figure>
-                <img src="screenshot/queries5.png" alt="SELECT_GENRE_INFLUENCES_QUERY" style="width: 500px; height: auto" />
-              </figure>
-              
-              <p><strong>3.2.2.6 </strong>To provide the user with a list of regions (countries) to filter artists by:The backend uses the query <strong>REGIONS_QUERY</strong>.</p>
-                <figure>
-                <img src="screenshot/queries7.png" alt="Fine Arts" style="width: 500px; height: auto" />
-              </figure>
-              
-        
-      </section>
-      <section id="technical-architecture__wikidata-integration" role="technical-architecture-directory">
-        <h3>3.3  SPARQL Query to Wikidata</h3>
-        <p>The backend sends the SPARQL queries to Wikidata. The queries are executed on the Wikidata server to retrieve the relevant data. For example:</p>
-      <ul>
-       <li> For painters, it searches for artists active within a time frame and from a specific country.</li>
-       <li> For musicians, it searches for influences between artists and music genres.</li>
-      </ul>
-      </section>
-      <section id="technical-architecture__backend" role="technical-architecture__backend">
-        <h3>3.4 Data Processing by the Backend</h3>
-        <p>The backend receives the data from Wikidata and processes it:</p>
-        <ul>
-         <li>Filtering and Structuring: The backend will structure the data into a format that can be easily used by the frontend. For example, it will create a JSON object containing artists and their works.</li>
-        <li>Charts: The backend can create charts, such as the total number of works per artist, to send them to the frontend.</li>
-        </ul>
-      </section>
-      <section id="technical-architecture__frontend" role="technical-architecture__frontend">
-        <h3>3.5 API Response to the Frontend</h3>
-        <p>After processing the data, the backend sends an API response to the frontend. This response contains:</p>
-        <ul>
-        <li>Structured data about artists and their works (for painters).</li>
-        <li>Data about musical influences (for musicians).</li>
-        </ul>
-      </section>
-      <section id="technical-architecture__frontend_visualization" role="technical-architecture__frontend_visualization">
-        <h3>3.6. Data Visualization on the Frontend</h3>
-        <p>Once the processed data is received from the backend, the frontend presents it using tables and charts for a clear and interactive user experience. The visualization process is structured as follows:</p>
-      
-      </section>
-    </section>
+      <section id="technical-architecture" role="technical-architecture-directory">
+        <h2>3. Architecture and Technical Aspects</h2>
+        <section id="technical-architecture__system" role="technical-architecture-directory">
+          <h3>3.1 System features <!-- architecture --></h3>
+          <figure>
+            <p>Fine Arts</p>
+            <img src="screenshot/finearts1.png" alt="Fine Arts" style="width: 500px; height: auto" />
+          </figure>
+          <figure>
+            <img src="screenshot/finearts2.png" alt="Fine Arts" style="width: 500px; height: auto" />
+          </figure>
+          <figure>
+            <p>Music</p>
+            <img src="screenshot/music1.png" alt="Music" style="width: 500px; height: auto" />
+          </figure>
+          <figure>
+            <p>Music</p>
+            <img src="screenshot/music2.png" alt="Music" style="width: 500px; height: auto" />
+          </figure>
+          <figure>
+            <p>Music Genre</p>
+            <img src="screenshot/music_genre.png" alt="Music Genre" style="width: 500px; height: auto" />
+          </figure>
+          <figure>
+            <p>Song recommendation</p>
+            <img src="screenshot/recommended_songs.png" alt="Recommended songs" style="width: 500px; height: auto" />
+          </figure>
+        </section>
+        <section id="technical-architecture__data-flows" role="technical-architecture-directory">
+          <h3>3.2 Data Flows</h3>
+          <p>The application interacts with Wikidata through SPARQL queries to gather information about artists, their
+            influences, and the evolution of music genres.
+            Below, we will describe how data is retrieved, processed, and transmitted between the application's
+            components:</p>
+          <p><strong> 3.2.1 User Inputs Data </strong></p>
+          <p>The user initiates the search process by filling out a form on the frontend, where they can specify, based
+            on the current webpage:</p>
+          <ul>
+            <li><strong>Time range</strong> (Start Year and End Year) to filter the data.</li>
+            <li><strong>Country</strong> to filter artists by their place of origin (for painters).</li>
+            <li><strong>Music Genre</strong> or <strong>Artist</strong> to explore musical influences.</li>
+          </ul>
+          <p>This data is sent to the backend via a HTTP request that includes the specified parameters
+            for the SPARQL query.</p>
 
-    <section id="rdf-model" role="rdf-model-directory">
-      <h2>4. RDF Model and Linked Data</h2>
-      <p>The application retrieves structured data from Wikidata using SPARQL queries and represents it in RDF (Resource Description Framework) format. 
-      RDF enables the data to be linked, reusable, and queryable across different datasets.</p>
-      <section id="rdf-model__vocabulary" role="rdf-model-directory">
-        <h3>4.1 Vocabulary/Ontology Used</h3>
-        <p>The RDF model in this project leverages Wikidata's ontology and standard RDF vocabularies to describe entities and their relationships. The key ontologies and properties used include:
-       </p>
-        <p>Core RDF Vocabularies & Prefixes</p>
-        <ul>
-        <li>wd: → Wikidata entities (e.g., wd:Q1028181 → Painter)</li>
-        <li>wdt: → Wikidata direct properties (e.g., wdt:P106 → Occupation)</li>
-        <li>rdfs: → RDF Schema (for labels and descriptions)</li>
-        <li>xsd: → XML Schema for data types (e.g., date formatting)</li>
-        </ul>
-        <figure>
-          <p><strong>Key Wikidata Properties Used</strong></p>
-          <img src="screenshot/wikidata.png" alt="WIKIDATA" style="width: 600px; height: auto" />
-        </figure>
+          <p><strong> 3.2.2 API Request to the Backend</strong></p>
+          <p>The backend (Next.js) receives the user's request and constructs the corresponding SPARQL query based on
+            the user's input.</p>
+          <p> <strong>3.2.2.1</strong> For Painters: If the user specifies a time period and a country, the backend will
+            use the <strong>FINE_ARTS_QUERY_WITH_FILTERS</strong> query, which includes a filter for the start and end
+            year, as well as the selected country. The query looks like this:</p>
+          <figure>
+            <img src="screenshot/queries6.png" alt="FINE_ARTS_QUERY_WITH_FILTERS" style="width: 500px; height: auto" />
+          </figure>
+          <p><strong>3.2.2.2</strong> For Music Artists and Their Influences: If the user wants to see the influences of
+            a specific music artist, the backend will use the <strong>MUSIC_INFLUENCES_QUERY</strong>, which searches
+            for musical artists and their influences based on the region (e.g., artists from the United States):</p>
+          <figure>
+            <img src="screenshot/queries2.png" alt="MUSIC_INFLUENCES_QUERY" style="width: 500px; height: auto" />
+          </figure>
+          <p><strong>3.2.2.3</strong> For music genre influences:The backend uses the query
+            <strong>GENRE_INFLUENCES_QUERY</strong>, which retrieves a list of music genres
+          </p>
+          <figure>
+            <img src="screenshot/queries3.png" alt="GENRE_INFLUENCES_QUERY" style="width: 500px; height: auto" />
+          </figure>
+          <p><strong>3.2.2.4</strong> In order to retrieve all the music genres that have the "influenced by" property:
+            The
+            backend uses the query <strong>MUSIC_GENRES_INFLUENCED_BY</strong>.
+          <figure>
+            <img src="screenshot/queries4.png" alt="MUSIC_GENRES_INFLUENCED_BY" style="width: 500px; height: auto" />
+          </figure>
+          <p><strong>3.2.2.5</strong> For exploring influences of a specific genre: The backend
+            constructs a dynamic query using <strong>SELECT_GENRE_INFLUENCES_QUERY</strong>, where selectedGenre is
+            replaced with the specific genre ID.</p>
+          <figure>
+            <img src="screenshot/queries5.png" alt="SELECT_GENRE_INFLUENCES_QUERY" style="width: 500px; height: auto" />
+          </figure>
+
+          <p><strong>3.2.2.6 </strong>To provide the user with a list of regions (countries) to filter artists by: The
+            backend uses the query <strong>REGIONS_QUERY</strong>.</p>
+          <figure>
+            <img src="screenshot/queries7.png" alt="Fine Arts" style="width: 500px; height: auto" />
+          </figure>
+
+          <p><strong>3.2.2.7 </strong>To provide the user with some music recommendation based on the selected genre: The
+            backend uses the query <strong>SONG_RECOMMENDATION_QUERY</strong>.</p>
+          <figure>
+            <img src="screenshot/recommendation_query.png" alt="recommendation_query" style="width: 500px; height: auto" />
+          </figure>
+
+
+        </section>
+        <section id="technical-architecture__wikidata-integration" role="technical-architecture-directory">
+          <h3>3.3 SPARQL Query to Wikidata</h3>
+          <p>The backend sends the SPARQL queries to Wikidata. The queries are executed on the Wikidata server to
+            retrieve the relevant data. For example:</p>
+          <ul>
+            <li> For painters, it searches for artists active within a time frame and from a specific country.</li>
+            <li> For musicians, it searches for influences between artists and music genres.</li>
+          </ul>
+        </section>
+        <section id="technical-architecture__backend" role="technical-architecture__backend">
+          <h3>3.4 Data Processing by the Backend</h3>
+          <p>The backend receives the data from Wikidata and processes it:</p>
+          <ul>
+            <li>Filtering and Structuring: The backend will structure the data into a format that can be easily used by
+              the frontend. For example, it will create a JSON object containing artists and their works.</li>
+            <li>Charts: The backend can create charts, such as the total number of works per artist, to send them to the
+              frontend.</li>
+          </ul>
+        </section>
+        <section id="technical-architecture__frontend" role="technical-architecture__frontend">
+          <h3>3.5 API Response to the Frontend</h3>
+          <p>After processing the data, the backend sends an API response to the frontend. This response contains:</p>
+          <ul>
+            <li>Structured data about artists and their works (for painters).</li>
+            <li>Data about musical influences (for musicians).</li>
+          </ul>
+        </section>
+        <section id="technical-architecture__frontend_visualization"
+          role="technical-architecture__frontend_visualization">
+          <h3>3.6. Data Visualization on the Frontend</h3>
+          <p>Once the processed data is received from the backend, the frontend presents it using tables and charts for
+            a clear and interactive user experience. The visualization process is structured as follows:</p>
+
+        </section>
       </section>
-      <section id="rdf-model__example" role="rdf-model-directory">
-        <h3>4.2 Example RDF Model</h3>
-        <p><strong>Example 1: RDF Representation of a Painter and Their Artwork</strong></p>
-        <pre>
+
+      <section id="rdf-model" role="rdf-model-directory">
+        <h2>4. RDF Model and Linked Data</h2>
+        <p>The application retrieves structured data from Wikidata using SPARQL queries and represents it in RDF
+          (Resource Description Framework) format.
+          RDF enables the data to be linked, reusable, and queryable across different datasets.</p>
+        <section id="rdf-model__vocabulary" role="rdf-model-directory">
+          <h3>4.1 Vocabulary/Ontology Used</h3>
+          <p>The RDF model in this project leverages Wikidata's ontology and standard RDF vocabularies to describe
+            entities and their relationships. The key ontologies and properties used include:
+          </p>
+          <p>Core RDF Vocabularies & Prefixes</p>
+          <ul>
+            <li>wd: → Wikidata entities (e.g., wd:Q1028181 → Painter)</li>
+            <li>wdt: → Wikidata direct properties (e.g., wdt:P106 → Occupation)</li>
+            <li>rdfs: → RDF Schema (for labels and descriptions)</li>
+            <li>xsd: → XML Schema for data types (e.g., date formatting)</li>
+          </ul>
+          <figure>
+            <p><strong>Key Wikidata Properties Used</strong></p>
+            <img src="screenshot/wikidata.png" alt="WIKIDATA" style="width: 600px; height: auto" />
+          </figure>
+        </section>
+        <section id="rdf-model__example" role="rdf-model-directory">
+          <h3>4.2 Example RDF Model</h3>
+          <p><strong>Example 1: RDF Representation of a Painter and Their Artwork</strong></p>
+          <pre>
           @prefix wd: &lt;http://www.wikidata.org/entity/&gt; .
           @prefix wdt: &lt;http://www.wikidata.org/prop/direct/&gt; .
           @prefix rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt; .
@@ -334,9 +451,9 @@ The primary goal of the platform is to facilitate intelligent querying, comparis
                    wdt:P571 "1503"^^xsd:gYear ;
                    rdfs:label "Mona Lisa"@en .
               </pre>
-<p></p>
-        <p><strong>Example 2: RDF Representation of Music Influences</strong></p>
-        <pre>
+          <p></p>
+          <p><strong>Example 2: RDF Representation of Music Influences</strong></p>
+          <pre>
           @prefix wd: &lt;http://www.wikidata.org/entity/&gt; .
           @prefix wdt: &lt;http://www.wikidata.org/prop/direct/&gt; .
           @prefix rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt; .
@@ -351,111 +468,125 @@ The primary goal of the platform is to facilitate intelligent querying, comparis
                   rdfs:label "Chuck Berry"@en .
               </pre>
 
-        
-      </section>
-      
-      </section>
-      
 
-  
-
-    <section id="user-documentation" role="user-documentation-directory">
-      <h2> 5. User Documentation</h2>
-      <section id="user-documentation__navigation" role="user-documentation__navigation">
-        <h3>5.1 Navigation</h3>
-        <p>The application consists of three main sections that users can navigate through:</p>
-         <ul>
-<li><strong>Discover Painters</strong> – Users can input a start year, end year, and country to filter painters and their artworks from Wikidata.</li>
-<li><strong>Music Artists & Their Influences</strong>– This section provides a visual representation of which artists influenced others, allowing users to explore connections across different time periods and genres.</li>
-<li><strong>Music Genre Influences</strong> – Users can track the evolution of music genres, viewing how one genre influenced another over time.</li>
-</ul>
-<p>Navigation is available via the top menu, allowing seamless movement between pages. The application ensures a smooth user experience by using Next.js client-side routing and server-side rendering (SSR) for fast performance.</p>
-        
-      </section>
-      <section id="user-documentation__routes" role="user-documentation__routes">
-        <h3>5.2 Routes</h3>
-       <p> The application uses the following routes for navigation:</p>
-<ul>
-<li>/ (Home Page) – Provides an introduction to the application and instructions on how to use it.</li>
-<li>/finearts (Painters & their works) – Allows users to input a start year, end year, and country to retrieve a list of painters and their works.</li>
-<li>/music (Music Artists & Their Artist Influences) – Displays musical artists and their influences in an interactive graph.</li>
-<li>/music_genres (Music Genre Influences) – Visualizes how music genres influenced each other over time.</li>
-
-</ul>
-      </section>
-      
-    </section>
-
-    <section id="conclusions" role="conclusions-directory">
-      <h2> 6. Conclusions and Future Work </h2>
-
-      <section id="conclusions__summary" role="conclusions-directory">
-        <h3>6.1 Conclusions</h3>
-        
-      <p>This application successfully retrieves and visualizes data about painters, musical artists, and genre influences from Wikidata using SPARQL queries. By leveraging Next.js for both the frontend and backend, 
-        it ensures fast performance through server-side rendering (SSR) and API routes.The key achievements of this project include:</p>
-      <ul>
-      <li>Efficient data retrieval using Wikidata’s structured knowledge base.</li>
-      <li>User-friendly interface for exploring artists and their influences.</li>
-      <li>Dynamic data visualization using Chart.js and D3.js for insights.</li>
-      <li>Seamless navigation with Next.js routing and state management.</li>
-      </ul>
-      <p>This application provides valuable insights into the evolution of art and music, making complex data more accessible to users.</p>
-      </section>
-      <section id="conclusions__future-directions" role="conclusions-directory">
-        <h3>6.2 Future Directions</h3>
-        
-        <p>Although the application is functional and provides useful visualizations, several areas can be improved or expanded in future iterations:</p>
-
-        <p><strong>6.2.1. Enhanced Data Filtering & Customization</strong></p>
-        <ul>
-<li>Allow users to refine searches using additional filters, such as art style, movement, or music era.</li>
-<li>Enable real-time search suggestions based on Wikidata’s extensive dataset.</li>
-</ul>
-<p><strong>6.2.2. Improved Data Visualizations</strong></p>
-<ul>
-<li>Introduce interactive visualizations with zoom, pan, and filtering options.</li>
-<li>Implement 3D network graphs to enhance artist influence visualization.</li>
-</ul>
-<p><strong>6.2.3. Expanded Data Sources</strong></p>
-<ul>
-<li>Integrate other open data sources (e.g., MusicBrainz, DBpedia) for more comprehensive results.</li>
-<li>Provide cross-referenced data between multiple knowledge bases.</li>
-</ul>
-<p><strong>6.2.4. User Authentication & Personalization</strong></p>
-<ul>
-<li>Allow users to save searches and favorite artists.</li>
-<li>Implement user accounts to track preferences and generate personalized recommendations.</li>
-</ul>
+        </section>
 
       </section>
-      
-    </section>
-</article>
 
-<section typeof="sa:AuthorsList" class="authors-section">
-  <h2>Authors</h2>
-  <ul>
-    <li typeof="sa:ContributorRole" property="schema:author">
-            <span typeof="schema:Person">
-              <meta property="schema:givenName" content="Ana-Delia">
-              <meta property="schema:familyName" content="Manoliu">
-              <span property="schema:name"> Ana-Delia Manoliu </span>
-            </span>
-    
-    </li>
-    <li typeof="sa:ContributorRole" property="schema:author">
-            <span typeof="schema:Person">
-              <meta property="schema:givenName" content="Andrada">
-              <meta property="schema:additionalName" content="Stefana">
-              <meta property="schema:familyName" content="Strimbu">
-              <span property="schema:name"> Andrada-Stefana Strimbu</span>
-            </span>
-      
-    </li>
-  
-  </ul>
-</section>
+
+
+
+      <section id="user-documentation" role="user-documentation-directory">
+        <h2> 5. User Documentation</h2>
+        <section id="user-documentation__navigation" role="user-documentation__navigation">
+          <h3>5.1 Navigation</h3>
+          <p>The application consists of three main sections that users can navigate through:</p>
+          <ul>
+            <li><strong>Discover Painters</strong> – Users can input a start year, end year, and country to filter
+              painters and their artworks from Wikidata.</li>
+            <li><strong>Music Artists & Their Influences</strong>– This section provides a visual representation of
+              which artists influenced others, allowing users to explore connections across different time periods and
+              genres.</li>
+            <li><strong>Music Genre Influences</strong> – Users can track the evolution of music genres, viewing how one
+              genre influenced another over time.</li>
+          </ul>
+          <p>Navigation is available via the top menu, allowing seamless movement between pages. The application ensures
+            a smooth user experience by using Next.js client-side routing and server-side rendering (SSR) for fast
+            performance.</p>
+
+        </section>
+        <section id="user-documentation__routes" role="user-documentation__routes">
+          <h3>5.2 Routes</h3>
+          <p> The application uses the following routes for navigation:</p>
+          <ul>
+            <li>/ (Home Page) – Provides an introduction to the application and instructions on how to use it.</li>
+            <li>/finearts (Painters & their works) – Allows users to input a start year, end year, and country to
+              retrieve a list of painters and their works.</li>
+            <li>/music (Music Artists & Their Artist Influences) – Displays musical artists and their influences in an
+              interactive graph.</li>
+            <li>/music_genres (Music Genre Influences) – Visualizes how music genres influenced each other over time, along with song recommendations, if available.
+            </li>
+
+          </ul>
+        </section>
+
+      </section>
+
+      <section id="conclusions" role="conclusions-directory">
+        <h2> 6. Conclusions and Future Work </h2>
+
+        <section id="conclusions__summary" role="conclusions-directory">
+          <h3>6.1 Conclusions</h3>
+
+          <p>This application successfully retrieves and visualizes data about painters, musical artists, and genre
+            influences from Wikidata using SPARQL queries. By leveraging Next.js for both the frontend and backend,
+            it ensures fast performance through server-side rendering (SSR) and API routes.The key achievements of this
+            project include:</p>
+          <ul>
+            <li>Efficient data retrieval using Wikidata’s structured knowledge base.</li>
+            <li>User-friendly interface for exploring artists and their influences.</li>
+            <li>Dynamic data visualization using Chart.js and D3.js for insights.</li>
+            <li>Seamless navigation with Next.js routing and state management.</li>
+          </ul>
+          <p>This application provides valuable insights into the evolution of art and music, making complex data more
+            accessible to users.</p>
+        </section>
+        <section id="conclusions__future-directions" role="conclusions-directory">
+          <h3>6.2 Future Directions</h3>
+
+          <p>Although the application is functional and provides useful visualizations, several areas can be improved or
+            expanded in future iterations:</p>
+
+          <p><strong>6.2.1. Enhanced Data Filtering & Customization</strong></p>
+          <ul>
+            <li>Allow users to refine searches using additional filters, such as art style, movement, or music era.</li>
+            <li>Enable real-time search suggestions based on Wikidata’s extensive dataset.</li>
+          </ul>
+          <p><strong>6.2.2. Improved Data Visualizations</strong></p>
+          <ul>
+            <li>Introduce interactive visualizations with zoom, pan, and filtering options.</li>
+            <li>Implement 3D network graphs to enhance artist influence visualization.</li>
+          </ul>
+          <p><strong>6.2.3. Expanded Data Sources</strong></p>
+          <ul>
+            <li>Integrate other open data sources (e.g., MusicBrainz, DBpedia) for more comprehensive results.</li>
+            <li>Provide cross-referenced data between multiple knowledge bases.</li>
+          </ul>
+          <p><strong>6.2.4. User Authentication & Personalization</strong></p>
+          <ul>
+            <li>Allow users to save searches and favorite artists.</li>
+            <li>Implement user accounts to track preferences and generate personalized recommendations.</li>
+          </ul>
+
+        </section>
+
+      </section>
+  </article>
+
+  <section typeof="sa:AuthorsList" class="authors-section">
+    <h2>Authors</h2>
+    <ul>
+      <li typeof="sa:ContributorRole" property="schema:author">
+        <span typeof="schema:Person">
+          <meta property="schema:givenName" content="Ana-Delia">
+          <meta property="schema:familyName" content="Manoliu">
+          <span property="schema:name"> Ana-Delia Manoliu </span>
+        </span>
+
+      </li>
+      <li typeof="sa:ContributorRole" property="schema:author">
+        <span typeof="schema:Person">
+          <meta property="schema:givenName" content="Andrada">
+          <meta property="schema:additionalName" content="Stefana">
+          <meta property="schema:familyName" content="Strimbu">
+          <span property="schema:name"> Andrada-Stefana Strimbu</span>
+        </span>
+
+      </li>
+
+    </ul>
+  </section>
 
 </body>
+
 </html>
