@@ -11,25 +11,22 @@ import FineArtsChart from "@/app/finearts/FineArtsChart";
 const FineArtsPage = () => {
   const [loading, setLoading] = useState(false);
   const [data, setData] = useState([]);
-  // const [chartData, setChartData] = useState([]);
 
   const handleSearch = async (startYear, endYear, regionQuery) => {
     setLoading(true);
     try {
       const query = FINE_ARTS_QUERY_WITH_FILTERS(startYear, endYear, regionQuery);
-      console.log("query: ", query);
+      // console.log("query: ", query);
       const results = await fetchSPARQLData(query);
       setData(results);
 
-      // Pregătim datele pentru grafic (grupăm după artist)
+
       const groupedData = results.reduce((acc, item) => {
-        const artistLabel = item.artistLabel; // Presupunem că `artistLabel` este câmpul care conține numele artistului
-        acc[artistLabel] = (acc[artistLabel] || 0) + 1; // Incrementăm numărul de lucrări pentru fiecare artist
+        const artistLabel = item.artistLabel;
+        acc[artistLabel] = (acc[artistLabel] || 0) + 1;
         return acc;
       }, {});
 
-      // Setăm datele pentru grafic
-      // setChartData(Object.entries(groupedData).map(([artist, count]) => ({ artist, count })));
 
     } catch (error) {
       console.error('Error during search:', error);
@@ -38,25 +35,26 @@ const FineArtsPage = () => {
   };
 
   return (
-    <>
-      <div className={styles.fineartsInput}>
-        <h1 className={styles.title}>Painters & their works</h1>
 
-        <div className={styles.form}>
-          <FineArtsForm onSubmitForm={handleSearch} />
-          <div className={styles.form}>
-            {loading ? (
-              <p>Loading...</p>
-            ) : (
-              <DataTable data={data} columns={['artistLabel', 'workLabel', 'creationYear']} />
-            )}
-          </div>
-        </div>
-        <div className={styles.chart}>
-        <FineArtsChart data={data} />
-        </div>
+    <>
+    <h1 className={styles.title}>Painters & their works</h1>
+      <div className={styles.form}>
+        <FineArtsForm onSubmitForm={handleSearch} />
+          {loading ? (
+            <p>Loading...</p>
+          ) : (
+            <DataTable data={data} columns={['artistLabel', 'workLabel', 'creationYear']} />
+            // <></>
+          )}
+       
       </div>
+      {/* <div className={styles.chart}> */}
+        <FineArtsChart data={data} />
+      {/* </div> */}
     </>
+    // <div className={styles.fineartsInput}>
+      
+    // </div>
   );
 };
 

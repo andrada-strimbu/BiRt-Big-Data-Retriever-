@@ -6,11 +6,10 @@
   justify-content: flex-end;
   gap: 50px;
   position: sticky;
-
-    font-family: 'Arial', sans-serif; /* Schimbă fontul */
-    font-size: 18px; /* Mărimea fontului */
-    font-weight: bold;
-  /* width: 100%; */
+  box-sizing: border-box;
+  font-family: 'Arial', sans-serif;
+  font-size: 18px;
+  font-weight: bold;
 }
 
 @media screen and (max-width: 450px) {
@@ -22,6 +21,5 @@
 .projectName {
   color: #31572C;
   text-align: center;
-  /* background-color: red; */
-  /* transform: translateY(50%); */
+  margin-top: 300px;
 }

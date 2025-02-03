@@ -1,7 +1,7 @@
 'use client';
 import React, { useEffect, useRef } from 'react';
 import * as d3 from 'd3';
-import styles from './finearts.module.css'; // Importăm fișierul CSS separat
+import styles from './finearts.module.css'; 
 
 const FineArtsChart = ({ data }) => {
   const svgRef = useRef();
@@ -9,8 +9,14 @@ const FineArtsChart = ({ data }) => {
   useEffect(() => {
     if (data && data.length > 0) {
       drawChart(data);
+      window.addEventListener('resize', handleResize);
+      return () => window.removeEventListener('resize', handleResize);
     }
   }, [data]);
+
+  const handleResize = () => {
+    drawChart(data);
+  };
 
   const drawChart = (data) => {
     const artistCounts = data.reduce((acc, item) => {
@@ -24,14 +30,16 @@ const FineArtsChart = ({ data }) => {
     const labels = Object.keys(artistCounts);
     const values = Object.values(artistCounts);
 
-    const width = 1000;
-    const height = 400;
     const margin = { top: 20, right: 20, bottom: 60, left: 40 };
+    const width = svgRef.current.parentElement.clientWidth;
+    const height = 400;
 
-    const svg = d3
-      .select(svgRef.current)
-      .attr('width', width)
-      .attr('height', height);
+    const svg = d3.select(svgRef.current);
+    svg.selectAll('*').remove(); // Clear previous content
+
+    svg
+      .attr('viewBox', `0 0 ${width} ${height}`)
+      .attr('preserveAspectRatio', 'xMidYMid meet');
 
     const xScale = d3
       .scaleBand()
@@ -92,7 +100,7 @@ const FineArtsChart = ({ data }) => {
   };
 
   return (
-    <div className={styles.chartContainer}>
+    <div className={styles.chartContainer} style={{ width: '100%', overflow: 'hidden' }}>
       <svg ref={svgRef}></svg>
     </div>
   );

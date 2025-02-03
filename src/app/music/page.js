@@ -5,7 +5,7 @@ import { fetchSPARQLData } from '@/lib/sparql';
 import { MUSIC_INFLUENCES_QUERY } from '@/utils/queries';
 import * as d3 from 'd3';
 import DataTable from '@/components/DataTable';
-import styles from './music.module.css'
+import styles from './music.module.css';
 
 const MusicPage = () => {
   const [data, setData] = useState();
@@ -28,70 +28,75 @@ const MusicPage = () => {
   useEffect(() => {
     if (data) {
       drawChart(data, 'genreLabel');
-      drawChart(data, 'influencedLabel'); // Adăugăm și al doilea grafic pentru influencedLabel
+      drawChart(data, 'influencedLabel');
+      window.addEventListener('resize', handleResize);
+      return () => window.removeEventListener('resize', handleResize);
     }
   }, [data]);
 
-  const drawChart = (data, labelType) => {
-    // Dimensiunile graficului
-    const width = 1000;
-    const height = 400;
-    const margin = { top: 20, right: 20, bottom: 60, left: 40 };
+  const handleResize = () => {
+    if (data) {
+      drawChart(data, 'genreLabel');
+      drawChart(data, 'influencedLabel');
+    }
+  };
 
-    // Crează SVG
+  const drawChart = (data, labelType) => {
+    const margin = { top: 20, right: 20, bottom: 60, left: 40 };
+    const containerWidth = document.getElementById(`${labelType}-chart`).parentElement.clientWidth;
+    const width = Math.min(containerWidth, 800); // Set a maximum width of 800px
+    const height = 400;
+
     const svg = d3
       .select(`#${labelType}-chart`)
-      .attr('width', width)
-      .attr('height', height);
+      .attr('viewBox', `0 0 ${width} ${height}`)
+      .attr('preserveAspectRatio', 'xMidYMid meet');
 
-    // Grupăm datele după tipul ales (genreLabel sau influencedLabel)
+    svg.selectAll('*').remove(); // Clear previous content
+
     const labelCounts = d3.rollup(
       data,
       (v) => v.length,
-      (d) => d[labelType].value // Folosim 'genreLabel' sau 'influencedLabel'
+      (d) => d[labelType].value
     );
 
-    // Extragem stilurile muzicale și numărul de influențe
     const labels = Array.from(labelCounts.keys());
     const influences = Array.from(labelCounts.values());
 
-    // Creăm scalele pentru axele X și Y
     const xScale = d3
       .scaleBand()
-      .domain(labels)  // Folosim stilurile muzicale ca etichete
+      .domain(labels)
       .range([margin.left, width - margin.right])
       .padding(0.5);
 
     const yScale = d3
       .scaleLinear()
-      .domain([0, d3.max(influences)])  // Maximul influențelor
+      .domain([0, d3.max(influences)])
       .nice()
       .range([height - margin.bottom, margin.top]);
 
-    // Adăugăm axa X
     svg
-  .append('g')
-  .attr('class', 'x-axis')
-  .attr('transform', `translate(0,${height - margin.bottom})`)
-  .call(d3.axisBottom(xScale))
-  .selectAll('text')
-  .style('fill', '#111') // Culoarea textului axei X
-  .style('font-size', '12px') // Dimensiunea fontului
-  .style('font-weight', 'bold')
-  .attr('transform', 'rotate(-30)') // Opțional: înclină textul pentru lizibilitate
-  .style('text-anchor', 'end');
-    // Adăugăm axa Y
-    svg
-  .append('g')
-  .attr('class', 'y-axis')
-  .attr('transform', `translate(${margin.left}, 0)`)
-  .call(d3.axisLeft(yScale))
-  .selectAll('text')
-  .style('fill', '#111') // Culoarea textului axei Y
-  .style('font-size', '12px')
-  .style('font-weight', 'bold');
+      .append('g')
+      .attr('class', 'x-axis')
+      .attr('transform', `translate(0,${height - margin.bottom})`)
+      .call(d3.axisBottom(xScale))
+      .selectAll('text')
+      .style('fill', '#111')
+      .style('font-size', '10px')
+      .style('font-weight', 'bold')
+      .attr('transform', 'rotate(-30)')
+      .style('text-anchor', 'end');
 
-    // Creăm barele pentru fiecare stil
+    svg
+      .append('g')
+      .attr('class', 'y-axis')
+      .attr('transform', `translate(${margin.left}, 0)`)
+      .call(d3.axisLeft(yScale))
+      .selectAll('text')
+      .style('fill', '#111')
+      .style('font-size', '10px')
+      .style('font-weight', 'bold');
+
     svg
       .append('g')
       .selectAll('.bar')
@@ -99,24 +104,27 @@ const MusicPage = () => {
       .enter()
       .append('rect')
       .attr('class', 'bar')
-      .attr('x', (d, i) => xScale(labels[i]))  // Plasăm fiecare bară în funcție de stilul muzical
-      .attr('y', (d) => yScale(d))  // Înălțimea fiecărei bare
-      .attr('width', xScale.bandwidth())  // Lățimea barei
-      .attr('height', (d) => height - margin.bottom - yScale(d))  // Înălțimea fiecărei bare
+      .attr('x', (d, i) => xScale(labels[i]))
+      .attr('y', (d) => yScale(d))
+      .attr('width', xScale.bandwidth())
+      .attr('height', (d) => height - margin.bottom - yScale(d))
       .attr('fill', '#588157');
   };
 
   return (
     <div className={styles.musicPageLayout}>
       <h1>Music Artists & Their Artist Influences</h1>
-      {/* <h1>Music Artists & Their Artist Influences</h1> */}
       {loading ? <p>Loading...</p> : <DataTable data={data} columns={['artistLabel', 'genreLabel', 'influencedLabel']} />}
 
-      {/* Primul grafic pentru genreLabel */}
-      <svg id="genreLabel-chart"></svg>
+      <div style={{ width: '100%', maxWidth: '800px', overflow: 'hidden' }}>
+        {/* Primul grafic pentru genreLabel */}
+        <svg id="genreLabel-chart"></svg>
+      </div>
 
-      {/* Al doilea grafic pentru influencedLabel - cati artisti a influentat fiecare artist */}
-      <svg id="influencedLabel-chart" style={{ marginTop: '50px' }}></svg>
+      <div style={{ width: '100%', maxWidth: '800px', overflow: 'hidden', marginTop: '50px' }}>
+        {/* Al doilea grafic pentru influencedLabel - cati artisti a influentat fiecare artist */}
+        <svg id="influencedLabel-chart"></svg>
+      </div>
     </div>
   );
 };

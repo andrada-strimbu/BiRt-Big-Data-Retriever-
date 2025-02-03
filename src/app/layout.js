@@ -13,14 +13,17 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-    <body>
-      <nav className={styles.layoutNav}>
-        <Link href="/finearts">Fine Arts </Link>
-        <Link href="/music">Music(WIP)</Link> 
-        <Link href='/music_genre'>Music Genre</Link> 
-      </nav>
-      <main>{children}</main>
-    </body>
-  </html>
+      <body>
+        <nav className={styles.layoutNav}>
+          <Link href="/finearts">Fine Arts </Link>
+          <Link href="/music">Music</Link>
+          <Link href='/music_genre'>Music Genre</Link>
+        </nav>
+        <main>
+          {children}
+        </main>
+
+      </body>
+    </html>
   );
 }

@@ -1,17 +1,18 @@
 /* Stil pentru header */
 .header {
-    width: 100%;
+    /* width: 100%; */
     display: flex;
-    justify-content: space-between; /* Mai bine aliniat decât space-around */
+    justify-content: space-between; 
+    gap: 20px;
     align-items: center;
-    padding: 10px 20px; /* Mai mult padding pentru un aspect mai aerisit */
-    background-color: #588157; /* Culoare de fundal verde */
-    color: #F0EAD2; /* Text deschis */
+    padding: 10px 20px;
+    background-color: #588157; 
+    color: #F0EAD2; 
     border-radius: 15px;
-    font-family: 'Arial', sans-serif; /* Fontul folosit */
-    font-size: 20px; /* Mărime font mai mare */
+    font-family: 'Arial', sans-serif; 
+    /* font-size: 20px; */
     font-weight: bold;
-    box-sizing: border-box; /* Asigură că padding-ul nu depășește lățimea */
+    /* box-sizing: border-box;  */
 }
 
 /* Stil pentru body */
@@ -58,10 +59,15 @@
     gap: 20px;
     border-radius: 15px;
     padding: 20px;
-    width: 80%;
+    /* width: 80%; */
     margin: 0 auto;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
     overflow-x: auto; /* Scroll orizontal doar dacă e necesar */
+}
+@media screen and (max-width: 768px) {
+    .fetchedResults {
+        width: 100%;
+    }
 }
 
 /* Stil pentru tabel */
@@ -88,48 +94,13 @@
     text-align: center;
 }
 
-/* Alternare culori rânduri */
 .fetchedResults tbody tr:nth-child(even) {
     background-color: #EADBC8;
 }
 
-/* Hover pe rânduri */
 .fetchedResults tbody tr:hover {
     background-color: #D4A373;
     color: #fff;
 }
 
 
-/* Responsivitate pentru dispozitive mici */
-@media screen and (max-width: 500px) {
-    .fetchedResults {
-        max-width: 100%;
-        padding: 15px;
-    }
-
-    .fetchedResults table {
-        display: block;
-        overflow-x: auto;
-    }
-
-    .fetchedResults th, .fetchedResults td {
-        font-size: 14px;
-        padding: 8px;
-    }
-
-    /* Pentru .header */
-    .header {
-        flex-direction: column; /* Pe ecrane mici, header-ul devine pe verticală */
-        gap: 15px; /* Mai puțin gap între elemente */
-        text-align: center; /* Aliniere pe centru */
-    }
-
-    /* Ajustăm body */
-    .body {
-        max-height: 350px; /* Mai mult spațiu disponibil pentru body */
-    }
-
-    .row {
-        gap: 15px; /* Spatiere mai mare între elemente pe dispozitive mici */
-    }
-}
