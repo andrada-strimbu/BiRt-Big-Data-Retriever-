@@ -1,36 +1,160 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+<!-- Badges -->
+<p>
+  <a href="https://github.com/andrada-strimbu/BiRt-Big-Data-Retriever-/graphs/contributors">
+    <img src="https://img.shields.io/github/contributors/andrada-strimbu/BiRt-Big-Data-Retriever-" alt="contributors" />
+  </a>
+  <a href="">
+    <img src="https://img.shields.io/github/last-commit/andrada-strimbu/BiRt-Big-Data-Retriever-" alt="last update" />
+  </a>
+  <a href="https://github.com/andrada-strimbu/BiRt-Big-Data-Retriever-/network/members">
+    <img src="https://img.shields.io/github/forks/andrada-strimbu/BiRt-Big-Data-Retriever-" alt="forks" />
+  </a>
+  <a href="https://github.com/andrada-strimbu/BiRt-Big-Data-Retriever-/stargazers">
+    <img src="https://img.shields.io/github/stars/andrada-strimbu/BiRt-Big-Data-Retriever-" alt="stars" />
+  </a>
+  <a href="https://github.com/andrada-strimbu/BiRt-Big-Data-Retriever-/issues/">
+    <img src="https://img.shields.io/github/issues/andrada-strimbu/BiRt-Big-Data-Retriever-" alt="open issues" />
+  </a>
+</p>
+<p>
+  <a href="https://www.uaic.ro/">
+    <img src="https://img.shields.io/badge/project-academic-blue" alt="uaic" />
+  </a>
+  <a href="https://www.info.uaic.ro/">
+    <img src="https://img.shields.io/badge/infoiasi-FII-green" alt="fii" />
+  </a>
+  <a href="https://profs.info.uaic.ro/sabin.buraga/teach/courses/wade/index.html">
+    <img src="https://img.shields.io/badge/wade-2024-orange" alt="wade" />
+  </a>
+  <a href="https://profs.info.uaic.ro/sabin.buraga/teach/courses/wade/">
+    <img src="https://img.shields.io/badge/web-semantic-purple" alt="web" />
+  </a>
+</p>
+   
+<h4>
+    <a href="https://github.com/andrada-strimbu/BiRt-Big-Data-Retriever-">View Demo</a>
+  <span> · </span>
+    <a href="https://github.com/andrada-strimbu/BiRt-Big-Data-Retriever-">Documentation</a>
+  <span> · </span>
+    <a href="https://github.com/andrada-strimbu/BiRt-Big-Data-Retriever-">Report Bug</a>
+  <span> · </span>
+    <a href="https://github.com/andrada-strimbu/BiRt-Big-Data-Retriever-">Request Feature</a>
+  </h4>
+</div>
 
-## Getting Started
+<br />
 
-First, run the development server:
+<!-- Table of Contents -->
+# :notebook_with_decorative_cover: Table of Contents
+
+- [About the Project](#star2-about-the-project)
+  * [Screenshots](#camera-screenshots)
+  * [Tech Stack](#space_invader-tech-stack)
+  * [Features](#dart-features)
+  * [Color Reference](#art-color-reference)
+- [Getting Started](#toolbox-getting-started)
+  * [Prerequisites](#bangbang-prerequisites)
+  * [Installation](#gear-installation)
+  * [Run Locally](#running-run-locally)
+- [Usage](#eyes-usage)
+- [Roadmap](#compass-roadmap)
+- [Contributing](#wave-contributing)
+  * [Code of Conduct](#scroll-code-of-conduct)
+
+
+  
+
+<!-- About the Project -->
+## :star2: About the Project
+
+
+<!-- Screenshots -->
+### :camera: Screenshots
+
+<div align="center"> 
+  <img src="https://placehold.co/600x400?text=Your+Screenshot+here" alt="screenshot" />
+</div>
+
+
+<!-- TechStack -->
+### :space_invader: Tech Stack
+
+<details>
+  <summary>Client</summary>
+  <ul>
+    <li><a href="https://nextjs.org/">Next.js</a></li>
+    <li><a href="https://reactjs.org/">React.js</a></li>
+  </ul>
+</details>
+
+<details>
+  <summary>Server</summary>
+  <ul>
+    <li><a href="https://nestjs.com/">Next.js</a></li>
+  </ul>
+</details>
+<!-- Features -->
+### :dart: Features
+
+- 
+- Feature 2
+- Feature 3
+
+<!-- Color Reference -->
+### :art: Color Reference
+
+| Color             | Hex                                                                |
+| ----------------- | ------------------------------------------------------------------ |
+| Primary Color | ![#588157](https://via.placeholder.com/10/588157?text=+) #588157 |
+| Secondary Color | ![#f1ead3](https://via.placeholder.com/10/f1ead3?text=+) #f1ead3 |
+| Text Color | ![#132b12](https://via.placeholder.com/10/132b12?text=+) #132b12 |
+
+
+
+<!-- Getting Started -->
+## 	:toolbox: Getting Started
+
+<!-- Prerequisites -->
+### :bangbang: Prerequisites
+
+This project uses npm as package manager
+
+
+<!-- Installation -->
+### :gear: Installation
+
+Install my-project with npm
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+  npm install my-project
+  cd my-project
+```
+   
+
+
+<!-- Run Locally -->
+### :running: Run Locally
+
+Clone the project
+
+```bash
+  git clone https://github.com/Louis3797/awesome-readme-template.git
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Go to the project directory
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+```bash
+  cd my-project
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Install dependencies
 
-## Learn More
+```bash
+  npm install
+```
 
-To learn more about Next.js, take a look at the following resources:
+Start the server
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```bash
+  npm run dev
+```
