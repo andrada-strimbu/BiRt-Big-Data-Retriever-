@@ -94,8 +94,9 @@ export default function Influences() {
 
     return (
         option ? (
-            <div className={styles.musicGenre}>
-                <h1>Music Genre Influences</h1>
+            // <div className={styles.musicGenre}>
+            <>
+                <h1 className={styles.title}>Music Genre Influences</h1>
                 <select
                     className={styles.genreSelector}
                     id="genreSelect"
@@ -131,9 +132,10 @@ export default function Influences() {
                     </table>
                     {influences.length ? <button onClick={() => setOption(0)}>Genre-Based Recommendations</button> : null}
                 </div>
-            </div>
+            </>
+            // {/* </div> */ }
         ) : (
-            <RecommendedSongsTable recommendedSongs={recommendedSongs} goBack={() => setOption(1)} />
-        )
+        <RecommendedSongsTable recommendedSongs={recommendedSongs} goBack={() => setOption(1)} />
+    )
     );
 }

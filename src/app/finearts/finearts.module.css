@@ -1,14 +1,14 @@
-/* Stiluri pentru containerul general al paginii */
+
 .fineartsInput {
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 100%;
-    padding: 40px; /* Redus paddingul pentru un aspect mai echilibrat */
+    /* width: 100%; */
+    padding: 40px;
     gap: 40px;
+    background-color: pink;
 }
 
-/* Stiluri pentru titlul paginii */
 .title {
     text-align: center;
     margin-top: 50px;
@@ -16,79 +16,53 @@
     font-weight: bold;
 }
 
-/* Stiluri pentru formular */
 .form {
+    /* background-color: aqua; */
     display: flex;
     align-items: center;
-    justify-content: space-between; /* Două coloane */
-    width: 80%; /* Lățimea generală a formularului */
+    justify-content: space-between; 
+    /* width: 100%; */
     gap: 20px;
 }
 
-.form > div {
-    flex-shrink: 0;
+@media screen and (max-width: 768px) {
+    .form {
+        flex-direction: column;
+        width: 100%;
+    }
 }
 
-.form .formInput {
-    width: 30%; /* 30% din lățimea paginii pentru formular */
-}
 
-/* Stiluri pentru containerul tabelului */
+
+
 .dataTableWrapper {
     display: flex;
-    justify-content: center; /* Centrăm tabelul pe orizontală */
-    align-items: flex-start; /* Aliniem tabelul în partea de sus */
-    width: 70%; /* 70% din lățimea paginii pentru tabel */
+    justify-content: center;
+    align-items: flex-start;
+    width: 70%;
     height: auto;
 }
 
 .dataTableWrapper table {
     width: 100%;
     border-collapse: collapse;
-    table-layout: fixed; /* Coloanele vor fi distribuite uniform */
+    table-layout: fixed; 
 }
 
-/* Stiluri pentru rânduri și celule din tabel */
+
 .dataTableWrapper th, .dataTableWrapper td {
-    padding: 12px 15px; /* Spatiere mai largă pentru a face tabelul mai ușor de citit */
+    padding: 12px 15px; 
     border: 1px solid #ddd;
     text-align: left;
     word-wrap: break-word;
 }
 
-/* Fundal diferit pentru antetul tabelului */
+
 .dataTableWrapper th {
     background-color: #f4f4f4;
     font-weight: bold;
 }
 
-/* Stiluri pentru containerul graficului */
-.chartContainer {
-    width: 80%;  /* Setează lățimea containerului graficului */
-    max-width: 1000px;  /* Lățimea maximă a graficului */
-    margin: 0 auto;
-    padding: 20px 0;  /* Spatiu de sus/jos pentru grafic */
-}
 
-/* Responsivitate pentru ecrane mai mici */
-@media screen and (max-width: 800px) {
-    .form {
-        flex-direction: column;  /* Pe ecrane mici, coloanele se vor aranja vertical */
-    }
 
-    .form > div {
-        width: 100%;  /* Pe dispozitive mici, fiecare secțiune va ocupa întreaga lățime */
-    }
 
-    /* Tabelul va rămâne complet pe ecrane mici */
-    .dataTableWrapper {
-        width: 100%;  /* Tabelul va ocupa întreaga lățime pe dispozitive mici */
-        overflow-x: auto;  /* Dacă este nevoie, scroll orizontal */
-    }
-
-    /* Graficul pe ecrane mici */
-    .chartContainer {
-        width: 100%;  /* Graficul va ocupa întreaga lățime pe dispozitive mici */
-        max-width: none;  /* Elimina limita de lățime maximă pe ecrane mici */
-    }
-}

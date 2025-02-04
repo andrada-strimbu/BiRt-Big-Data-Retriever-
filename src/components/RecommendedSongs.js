@@ -16,10 +16,8 @@ export default function RecommendedSongsTable({ recommendedSongs, goBack }) {
     });
 
     return (
-        <div className={styles.musicGenre}>
-            <h1>Recommended Songs</h1>
-
-            {/* Language Selector Dropdown */}
+        <>
+            <h1 className={styles.title}>Recommended Songs</h1>
             <label htmlFor="languageSelect">Select Language:</label>
             <select
                 className={styles.genreSelector}
@@ -71,7 +69,7 @@ export default function RecommendedSongsTable({ recommendedSongs, goBack }) {
                     </tbody>
                 </table>
             </div>
-            <button onClick={goBack}>Back to Genre Selection</button>
-        </div>
+            <button className={styles.backToGenreBtn} onClick={goBack}>Back to Genre Selection</button>
+        </>
     );
 }

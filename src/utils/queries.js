@@ -1,3 +1,4 @@
+
 export const FINE_ARTS_QUERY = `
   PREFIX wd: <http://www.wikidata.org/entity/>
   PREFIX wdt: <http://www.wikidata.org/prop/direct/>
@@ -70,25 +71,6 @@ WHERE {
 `;
 
 
-// export const FINE_ARTS_QUERY_WITH_FILTERS = (startYear, endYear, region) => `
-// PREFIX wd: <http://www.wikidata.org/entity/>
-// PREFIX wdt: <http://www.wikidata.org/prop/direct/>
-// PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-// PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
-
-// SELECT ?artist ?artistLabel ?work ?workLabel ?creationYear
-// WHERE {
-//   ?artist wdt:P106 wd:Q1028181;           # Occupation: Painter
-//           wdt:P27 ${region} .            # Filter by region (e.g., wd:Q38 for Italy)
-//   ?work wdt:P170 ?artist;                # Creator of the work
-//         wdt:P571 ?creationDate .         # Creation date
-//   BIND(YEAR(xsd:dateTime(?creationDate)) AS ?creationYear)  # Extract creation year
-//   FILTER(?creationYear >= ${startYear} && ?creationYear <= ${endYear})
-//   SERVICE wikibase:label { bd:serviceParam wikibase:language "en" }
-// }
-// LIMIT 20
-// `;
-
 export const FINE_ARTS_QUERY_WITH_FILTERS = (startYear, endYear, region) => `
  PREFIX wd: <http://www.wikidata.org/entity/>
 PREFIX wdt: <http://www.wikidata.org/prop/direct/>
@@ -121,25 +103,6 @@ export const REGIONS_QUERY = `
   ORDER BY ?regionLabel
 `;
 
-// ORDER BY ?artistLabel
-
-
-// export const SONGS_RECOMMENDATION_QUERY = (genreID) => `
-//   PREFIX wd: <http://www.wikidata.org/entity/>
-// PREFIX wdt: <http://www.wikidata.org/prop/direct/>
-
-// SELECT DISTINCT ?song ?songLabel ?artistLabel
-// WHERE {
-//   ?song wdt:P31 wd:Q7366;   # Must be an instance of "song"
-//         wdt:P136 ${genreID}; # Example: Rock (Q11399)
-//         wdt:P175 ?artist.   # Performer (artist)
-  
-//   SERVICE wikibase:label { bd:serviceParam wikibase:language "en". }
-// }
-// LIMIT 20
-// `
-
-
 export const SONGS_RECOMMENDATION_QUERY = (genreID) => `
 PREFIX wd: <http://www.wikidata.org/entity/>
 PREFIX wdt: <http://www.wikidata.org/prop/direct/>
@@ -157,7 +120,7 @@ WHERE {
   OPTIONAL {
     ?artist schema:description ?artistDescription.
     BIND(LANG(?artistDescription) AS ?language)
-    FILTER(?language IN ("en", "fr", "de", "it"))  # Keep only Spanish, French, German, Italian
+    FILTER(?language IN ("en", "fr", "de", "it"))  
   }
 }
 LIMIT 20

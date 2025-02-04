@@ -6,6 +6,7 @@
 
 body {
 background-image: url('download.jpg');
+/* background-color: blue; */
   backdrop-filter: blur(3px);
   background-size: cover;
     background-position: center;
@@ -16,20 +17,25 @@ background-image: url('download.jpg');
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
   overflow-y: auto;
-  width: 100%;
+  /* width: 100%; */
   min-height: 100vh;
 }
 
 main {
+  /* background-color: red; */
   display: flex;
-
-  /* justify-content: center; */
-  /* align-items: center; */
+  gap: 30px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   /* overflow-y: auto; */
   /* background-color: green; */
    height:100%;
    width:100%;
 }
+
+
+
 
 a {
   color: inherit;
