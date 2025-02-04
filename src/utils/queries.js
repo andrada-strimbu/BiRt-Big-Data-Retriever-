@@ -16,7 +16,7 @@ export const FINE_ARTS_QUERY = `
   LIMIT 20
 `;
 
-export const MUSIC_INFLUENCES_QUERY = `
+export const MUSIC_INFLUENCES_QUERY = (regionID) => `
   PREFIX wd: <http://www.wikidata.org/entity/>
   PREFIX wdt: <http://www.wikidata.org/prop/direct/>
   PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
@@ -24,7 +24,7 @@ export const MUSIC_INFLUENCES_QUERY = `
   SELECT ?artist ?artistLabel ?genre ?genreLabel ?influenced ?influencedLabel
   WHERE {
     ?artist wdt:P106 wd:Q639669;           # Occupation: Musician
-            wdt:P27 wd:Q30 .              # Citizen of the United States
+            wdt:P27 ${regionID} .              # Citizen of the United States
     ?artist wdt:P136 ?genre;              # Genre
             wdt:P737 ?influenced .        # Influences
     SERVICE wikibase:label { bd:serviceParam wikibase:language "en" }

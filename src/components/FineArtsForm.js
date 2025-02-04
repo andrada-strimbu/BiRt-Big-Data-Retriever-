@@ -14,14 +14,14 @@ export default function FineArtsForm({ onSubmitForm }) {
     useEffect(() => {
         
         const fetchRegions = async () => {
-            console.log("use effect");
+            // console.log("use effect");
             try {
-                console.log('[FETCH REGIONS]...');
+                // console.log('[FETCH REGIONS]...');
                 const cachedRegions = localStorage.getItem('regions');
                 if (cachedRegions) {
-                    console.log('[USING CACHED REGIONS]');
+                    // console.log('[USING CACHED REGIONS]');
                     const parsedRegions = JSON.parse(cachedRegions);
-                    console.log("[IF]parsed regions: ", parsedRegions);
+                    // console.log("[IF]parsed regions: ", parsedRegions);
                     const regionsList = parsedRegions.map((item) => ({
                         id: item.id,
                         label: item.label,
@@ -30,9 +30,9 @@ export default function FineArtsForm({ onSubmitForm }) {
                     setRegions(regionsList);
                     setRegionQuery(parsedRegions[0]?.id || ''); // Set default region
                 } else {
-                    console.log("ELSE");
+                    // console.log("ELSE");
                     const results = await fetchSPARQLData(REGIONS_QUERY);
-                    console.log("[ELSE]results: ", results);
+                    // console.log("[ELSE]results: ", results);
                     const regionsList = results.map((item) => ({
                         id: `wd:${item.region.value.split('/')[4]}`,
                         label: item.regionLabel.value,
@@ -41,7 +41,7 @@ export default function FineArtsForm({ onSubmitForm }) {
                     setRegions(regionsList);
                     setRegionQuery(regionsList[0]?.id || ''); // Set default region
                     localStorage.setItem('regions', JSON.stringify(regionsList)); // Cache regions
-                    console.log('[REGIONS CACHED]');
+                    // console.log('[REGIONS CACHED]');
                 }
             } catch (error) {
                 console.error('Error fetching regions:', error);

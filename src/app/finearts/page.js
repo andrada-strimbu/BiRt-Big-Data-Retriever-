@@ -16,7 +16,6 @@ const FineArtsPage = () => {
     setLoading(true);
     try {
       const query = FINE_ARTS_QUERY_WITH_FILTERS(startYear, endYear, regionQuery);
-      // console.log("query: ", query);
       const results = await fetchSPARQLData(query);
       setData(results);
 
@@ -44,17 +43,13 @@ const FineArtsPage = () => {
             <p>Loading...</p>
           ) : (
             <DataTable data={data} columns={['artistLabel', 'workLabel', 'creationYear']} />
-            // <></>
           )}
        
       </div>
-      {/* <div className={styles.chart}> */}
         <FineArtsChart data={data} />
-      {/* </div> */}
+    
     </>
-    // <div className={styles.fineartsInput}>
-      
-    // </div>
+
   );
 };
 
