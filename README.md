@@ -166,3 +166,9 @@ Start the server
 
 This project is a web-based platform that allows users to explore the connections between music genres, artists, and songs through data provided by Wikidata's SPARQL endpoint. Users can select a music genre to see which genres influenced it and receive song recommendations based on their selection. Additionally, an interactive artist influence network helps users discover how musicians have inspired each other over time. The platform also introduces an element of randomness in some displayed data to encourage users to explore new artists and musical styles. With an intuitive interface and rich visualizations, this system provides an engaging way to navigate the vast landscape of musical history and relationships.
 
+<!-- Contributing -->
+## :wave: Contributing
+
+<a href="https://github.com/andrada-strimbu/BiRt-Big-Data-Retriever-/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=Louis3797/awesome-readme-template" />
+</a>
