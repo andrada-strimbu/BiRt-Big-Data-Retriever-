@@ -60,10 +60,7 @@
   * [Installation](#gear-installation)
   * [Run Locally](#running-run-locally)
 - [Usage](#eyes-usage)
-- [Roadmap](#compass-roadmap)
 - [Contributing](#wave-contributing)
-  * [Code of Conduct](#scroll-code-of-conduct)
-
 
   
 
