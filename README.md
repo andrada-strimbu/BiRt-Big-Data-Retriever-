@@ -37,11 +37,11 @@
 <h4>
     <a href="https://github.com/andrada-strimbu/BiRt-Big-Data-Retriever-">View Demo</a>
   <span> · </span>
-    <a href="https://github.com/andrada-strimbu/BiRt-Big-Data-Retriever-">Documentation</a>
+    <a href="https://github.com/andrada-strimbu/BiRt-Big-Data-Retriever-/tree/main/documentatie-">Documentation</a>
   <span> · </span>
-    <a href="https://github.com/andrada-strimbu/BiRt-Big-Data-Retriever-">Report Bug</a>
+    <a href="https://github.com/andrada-strimbu/BiRt-Big-Data-Retriever-/issues">Report Bug</a>
   <span> · </span>
-    <a href="https://github.com/andrada-strimbu/BiRt-Big-Data-Retriever-">Request Feature</a>
+    <a href="https://github.com/andrada-strimbu/BiRt-Big-Data-Retriever-/issues">Request Feature</a>
   </h4>
 </div>
 
