@@ -1,5 +1,6 @@
-<!-- Badges -->
-<p>
+<div align="center">
+  <h1>BiRt-Big-Data-Retriever</h1>
+  <p>
   <a href="https://github.com/andrada-strimbu/BiRt-Big-Data-Retriever-/graphs/contributors">
     <img src="https://img.shields.io/github/contributors/andrada-strimbu/BiRt-Big-Data-Retriever-" alt="contributors" />
   </a>
@@ -30,6 +31,8 @@
     <img src="https://img.shields.io/badge/web-semantic-purple" alt="web" />
   </a>
 </p>
+</div>
+
    
 <h4>
     <a href="https://github.com/andrada-strimbu/BiRt-Big-Data-Retriever-">View Demo</a>
@@ -96,9 +99,9 @@
 <!-- Features -->
 ### :dart: Features
 
-- 
-- Feature 2
-- Feature 3
+- Music Genre Influence Exploration
+- Artist Influence Network
+- Personalized Song Recommendations
 
 <!-- Color Reference -->
 ### :art: Color Reference
@@ -123,12 +126,11 @@ This project uses npm as package manager
 <!-- Installation -->
 ### :gear: Installation
 
-Install my-project with npm
-
-```bash
-  npm install my-project
-  cd my-project
-```
+You need to install the following:
+<ol>
+  <li>Node.js</li>
+  <li>NPM</li>
+</ol>
    
 
 
@@ -138,13 +140,13 @@ Install my-project with npm
 Clone the project
 
 ```bash
-  git clone https://github.com/Louis3797/awesome-readme-template.git
+  git clone https://github.com/andrada-strimbu/BiRt-Big-Data-Retriever-.git
 ```
 
 Go to the project directory
 
 ```bash
-  cd my-project
+  cd BiRt-Big-Data-Retriever
 ```
 
 Install dependencies
@@ -158,3 +160,9 @@ Start the server
 ```bash
   npm run dev
 ```
+
+<!-- Usage -->
+## :eyes: Usage
+
+This project is a web-based platform that allows users to explore the connections between music genres, artists, and songs through data provided by Wikidata's SPARQL endpoint. Users can select a music genre to see which genres influenced it and receive song recommendations based on their selection. Additionally, an interactive artist influence network helps users discover how musicians have inspired each other over time. The platform also introduces an element of randomness in some displayed data to encourage users to explore new artists and musical styles. With an intuitive interface and rich visualizations, this system provides an engaging way to navigate the vast landscape of musical history and relationships.
+
