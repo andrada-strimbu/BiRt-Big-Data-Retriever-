@@ -35,7 +35,7 @@ const FineArtsChart = ({ data }) => {
     const height = 400;
 
     const svg = d3.select(svgRef.current);
-    svg.selectAll('*').remove(); // Clear previous content
+    svg.selectAll('*').remove();
 
     svg
       .attr('viewBox', `0 0 ${width} ${height}`)

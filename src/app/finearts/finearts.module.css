@@ -35,13 +35,11 @@
 
 
 
-
-/* Stiluri pentru containerul tabelului */
 .dataTableWrapper {
     display: flex;
-    justify-content: center; /* Centrăm tabelul pe orizontală */
-    align-items: flex-start; /* Aliniem tabelul în partea de sus */
-    width: 70%; /* 70% din lățimea paginii pentru tabel */
+    justify-content: center;
+    align-items: flex-start;
+    width: 70%;
     height: auto;
 }
 

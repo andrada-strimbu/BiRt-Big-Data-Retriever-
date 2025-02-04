@@ -1,8 +1,6 @@
-import localFont from "next/font/local";
 import "./globals.css";
 import Link from "next/link";
 import styles from './page.module.css'
-
 
 
 export const metadata = {

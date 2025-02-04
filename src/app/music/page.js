@@ -44,7 +44,7 @@ const MusicPage = () => {
   const drawChart = (data, labelType) => {
     const margin = { top: 20, right: 20, bottom: 60, left: 40 };
     const containerWidth = document.getElementById(`${labelType}-chart`).parentElement.clientWidth;
-    const width = Math.min(containerWidth, 800); // Set a maximum width of 800px
+    const width = Math.min(containerWidth, 800); 
     const height = 400;
 
     const svg = d3
@@ -52,7 +52,7 @@ const MusicPage = () => {
       .attr('viewBox', `0 0 ${width} ${height}`)
       .attr('preserveAspectRatio', 'xMidYMid meet');
 
-    svg.selectAll('*').remove(); // Clear previous content
+    svg.selectAll('*').remove(); 
 
     const labelCounts = d3.rollup(
       data,
