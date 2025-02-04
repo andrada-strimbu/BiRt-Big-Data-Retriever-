@@ -61,6 +61,7 @@
   * [Run Locally](#running-run-locally)
 - [Usage](#eyes-usage)
 - [Contributing](#wave-contributing)
+  * [Code of Conduct](#scroll-code-of-conduct)
 
   
 
